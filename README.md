@@ -23,7 +23,7 @@ Our Main focus will be on Team India, since their playing XI have almost remaine
 
 
 
-#### Proposed Method (within 1 page)
+#### Proposed Method
 
 Let us assume that India has played 100 ODI’s from 01 January, 2011 to 01 January 2015. And let us assume that in India won 60 out of 100 matches. 
 
@@ -31,14 +31,17 @@ In these 100 matches, let us say that Shikhar Dhawan has scored half century in 
 
 SO essentially it all boils down to the following -
 
-                S.Dhawan - Matches-100
+                V. Kohli - Matches-100
                             
 
 
 
 
 
-
+![alt tag](http://i.imgur.com/rtOmP8p.png)  ![alt tag](http://i.imgur.com/Mewns6Z.png)  
+![alt tag](http://i.imgur.com/Sn7Foja.png)
+![alt tag](http://i.imgur.com/SWzC9xH.png)  ![alt tag](http://i.imgur.com/eO04wyz.png) 
+![alt tag](http://i.imgur.com/xjPcCde.png)
 
 
 
