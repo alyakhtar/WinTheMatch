@@ -1,3 +1,4 @@
+import csv
 import requests
 from tabulate import tabulate
 from bs4 import BeautifulSoup
@@ -17,7 +18,9 @@ def team():
         l.append(fifty)
     mat.append(l)
   fo.write(tabulate(mat,tablefmt="fancy_grid").encode("utf8"))
-
+  with open('newfile.csv', 'wb') as f:
+    writer = csv.writer(f)
+    writer.writerows(mat)
 team()
 
 
