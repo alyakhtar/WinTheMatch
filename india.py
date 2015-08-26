@@ -17,10 +17,19 @@ def team():
       if fifty is not None:
         l.append(fifty)
     mat.append(l)
-  fo.write(tabulate(mat,tablefmt="fancy_grid").encode("utf8"))
+
+  q = []
+  for i in mat:
+    r = []
+    for x in i:
+      if x != "\n":
+        r.append(x)
+    q.append(r)
+
+  fo.write(tabulate(q,tablefmt="fancy_grid").encode("utf8"))
   with open('newfile.csv', 'wb') as f:
     writer = csv.writer(f)
-    writer.writerows(mat)
+    writer.writerows(q)
 team()
 
 
