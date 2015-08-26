@@ -1,8 +1,6 @@
 import csv
 import requests
-from tabulate import tabulate
 from bs4 import BeautifulSoup
-import pandas as pd
 
 
 def team():
