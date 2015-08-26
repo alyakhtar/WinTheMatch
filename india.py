@@ -1,4 +1,5 @@
 import requests
+from tabulate import tabulate
 from bs4 import BeautifulSoup
 
 def team():
@@ -6,12 +7,17 @@ def team():
   source_code = requests.get(url)
   plain_text = source_code.text
   soup = BeautifulSoup(plain_text,"lxml")  
-  fo = open("newfile.txt" , "wb") 
-  for link in soup.findAll('tr',{'class':'data1'}):
-    for link2 in link('td'):
-      fifty = link2.string
+  fo = open("newfile.txt" , "w") 
+  mat = [[u'\n', u'Player', u'\n', u'Span', u'\n', u'Mat', u'\n', u'Inns', u'\n', u'NO', u'\n', u'Runs', u'\n', u'HS', u'\n', u'Ave', u'\n', u'BF', u'\n', u'SR', u'\n', u'100', u'\n', u'50', u'\n', u'0', u'\n', u'4s', u'\n', u'6s', u'\n', u'\n']]
+  for tr in soup.findAll('tr',{'class':'data1'}):
+    l = []
+    for td in tr: 
+      fifty = td.string
       if fifty is not None:
-        fo.write(fifty.encode("utf8")+"\t")
-    fo.write("\n")
+        l.append(fifty)
+    mat.append(l)
+  fo.write(tabulate(mat,tablefmt="fancy_grid").encode("utf8"))
 
 team()
+
+
