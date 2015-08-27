@@ -1,6 +1,6 @@
 # WinTheMatch
 
-Minor project
+Minor Project
 
 ### Title
 
