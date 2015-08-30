@@ -2,6 +2,7 @@ import requests
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 import csv
+import sys
 import pandas as pd
 
 def team():
@@ -15,6 +16,7 @@ def team():
     mat = [[u'Player', u'Span', u'Mat', u'Inns', u'NO', u'Runs', u'HS',
             u'Ave', u'BF', u'SR', u'100', u'50', u'0', u'4s', u'6s']]
     m = []
+    i = 0
     for tr in soup.findAll('tr', {'class': 'data1'}):
         l = []
         for td in tr('td'):
@@ -22,20 +24,21 @@ def team():
                 abc = a.get('href')
                 name = abc.split('/')
                 # print name[4]
-                player_stats(name[4])
+                player_stats(name[4],i)
                 # m.append(abc)
             fifty = td.string
             if fifty is not None and fifty != "\n":
                 l.append(fifty)
+        i += 2.08                
         mat.append(l)
     print 'Search Completed!!'
     # print tabulate(mat)
     # fo.write(tabulate(mat,tablefmt="fancy_grid").encode("utf8"))
 
 
-def player_stats(player):
+def player_stats(player,i):
     stats = 'http://stats.espncricinfo.com/ci/engine/player/'+player +'?class=2;home_or_away=1;home_or_away=2;home_or_away=3;result=1;result=2;result=3;result=5;spanmax1=25+Aug+2015;spanmin1=25+Aug+2011;spanval1=span;team=6;template=results;type=batting;view=innings'
-    player_name(stats)
+    player_name(stats,i)
     source_code = requests.get(stats)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "lxml")
@@ -62,24 +65,22 @@ def player_stats(player):
 
     mt.pop(1)
     mt.pop(1)
-    # fo.write(tabulate(mt, tablefmt="fancy_grid").encode("utf8"))
     for x in xrange(len(res)):
         mt[x].append(opp[x])
         mt[x].append(res[x])
-    # print mt
-    # print tabulate(mt).encode("utf8")
-    fo.write(tabulate(mt, tablefmt="fancy_grid").encode("utf8"))
+    fo.write(tabulate(mt,tablefmt="fancy_grid").encode("utf8"))
 
-
-def player_name(url):
+def player_name(url,i):
     source_code = requests.get(url)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "lxml")
     for link in soup.findAll('h1', {'class': 'SubnavSitesection'}):
         data = link.get_text()
     name = data.split('/')
-    # print name[2]
-    fo.write('\n'+name[2]+'\n')
+    sys.stdout.write("\r%3.2f%% Completed" % i)
+    # print str(i)+"% Completed\n"
+    fo.write("\n"+name[2]+"\n")
+
 
 
 def match_result(url):
@@ -91,3 +92,5 @@ def match_result(url):
         data = link.string
         return data
         # print data
+
+team()
