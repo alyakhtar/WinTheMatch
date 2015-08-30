@@ -77,7 +77,7 @@ def player_name(url,i):
     for link in soup.findAll('h1', {'class': 'SubnavSitesection'}):
         data = link.get_text()
     name = data.split('/')
-    sys.stdout.write("\r%3.2f%% Completed" % i)
+    sys.stdout.write("\r%d%% Completed" % i)
     # print str(i)+"% Completed\n"
     fo.write("\n"+name[2]+"\n")
 
