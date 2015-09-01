@@ -2,6 +2,7 @@ import requests
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 import sys
+import pandas as pd
 
 
 def team():
@@ -73,7 +74,9 @@ def player_stats(player, i):
     for x in xrange(len(res)):
         mt[x].append(opp[x])
         mt[x].append(res[x])
-    fo.write(tabulate(mt, tablefmt="fancy_grid").encode("utf8"))
+    # fo.write(tabulate(mt, tablefmt="fancy_grid").encode("utf8"))
+    df = pd.DataFrame(mt)
+    df.to_csv("India_pandas_stats.csv")
 
 
 def player_name(url, i):
@@ -88,7 +91,9 @@ def player_name(url, i):
     sys.stdout.flush()
     # sys.stdout.write("\r%d%%\n Completed" % i)
     # print str(i)+"% Completed\n"
-    fo.write("\n"+name[2]+"\n")
+    # fo.write("\n"+name[2]+"\n")
+    # df = pd.DataFrame(name[2])
+    # df.to_csv("India_pandas_stats.csv")
 
 
 def match_result(url):
