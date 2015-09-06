@@ -2,6 +2,7 @@ import requests
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 import sys
+import csv
 
 
 def team():
@@ -34,10 +35,6 @@ def team():
 
 
 def player_stats(player, i ):
-    if i> 2.08:
-        with open('India_csv_test.csv', 'a') as f:
-            writer = csv.writer(f)
-            writer.writerows('\n')
     stats = 'http://stats.espncricinfo.com/ci/engine/player/'+player + \
         '?class=2;home_or_away=1;home_or_away=2;home_or_away=3;result=1;result=2;result=3;result=5;spanmax1=25+Aug+2015;spanmin1=25+Aug+2011;spanval1=span;team=6;template=results;type=batting;view=innings'
     play = player_name(stats, i)
