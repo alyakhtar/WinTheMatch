@@ -13,7 +13,7 @@ def team():
 
     plain_text = source_code.text
 
-    with open("data/India.html", "w") as output_file:
+    with open("Batting_data/India.html", "w") as output_file:
         output_file.write(plain_text)
 
     soup = BeautifulSoup(plain_text, "lxml")
@@ -45,7 +45,7 @@ def player_stats(player):
 
     plain_text = source_code.text
 
-    with open("data/stats_%s" % player, "w") as output_file:
+    with open("Batting_data/stats_%s" % player, "w") as output_file:
         output_file.write(plain_text)
 
     soup = BeautifulSoup(plain_text, "lxml")
@@ -67,7 +67,7 @@ def match_result(url):
 
     plain_text = source_code.text
 
-    with open("data/match_%s" % ''.join(rand) , "w") as output_file:
+    with open("Batting_data/match_%s" % ''.join(rand) , "w") as output_file:
         output_file.write(plain_text.encode("utf-8"))
 
 if __name__ == "__main__": 
