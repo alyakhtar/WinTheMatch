@@ -2,11 +2,6 @@ import requests
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 import sys
-import MySQLdb as mdb
-from warnings import filterwarnings
-# import MySQLdb as Database
-
-filterwarnings('ignore', category = mdb.Warning)
 
 
 def team():
@@ -152,7 +147,7 @@ def win_count():
     print 'Matches Won : ' + str(int(win)) 
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
-    print 'Win Percentage : %.2f%% ' % (percentage)
+    print 'Win Percentage : %.2f ' % (percentage)
 
 def win_location():
     win_home = 0.0
@@ -208,6 +203,42 @@ def win_location():
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
 
+def win_against():
+    runs = 0
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
+    percentage = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+    
+    for stats in newlist:
+        for name in stats:
+            if name[14] == 'V Kohli':
+                if name[12] == 'Australia':
+                    char = '*'
+                    runs = name[0]
+                    if runs.find(char) > -1:
+                        runs = runs.replace("*", "")
+
+                    if runs != 'DNB' and runs != 'TDNB':
+                        if int(runs) >= 50 and int(runs) <100 :
+                            res = name[13]
+                            if res.find(strng) > -1:
+                                win += 1
+                            elif res.find(strng2) > -1:
+                                nr +=1
+                            else:
+                                lost += 1
+
+    percentage = (win*100/(win+lost))
+
+    print 'Matches Won : ' + str(int(win)) 
+    print 'Matches Lost : ' + str(int(lost))
+    print 'No Result : ' + str(int(nr))
+    print 'Win Percentage : %.2f ' % (percentage)
+
+
 def search(list,ground):
     for (i, v) in enumerate(list):
        if v == ground:
@@ -221,3 +252,5 @@ if __name__ == '__main__':
     win_count()
     print '\n***HOME OR AWAY CASE***\n'
     win_location()
+    print '\n***VERSUS CASE***\n'
+    win_against()
