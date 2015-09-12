@@ -122,12 +122,13 @@ def display(list):
 
 def win_count():
     runs = 0
-    win = 0
-    nr = 0
-    lost = 0
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
     percentage = 0.0
     strng = 'India won'
     strng2 = 'No result'
+    
     for stats in newlist:
         for name in stats:
             if name[14] == 'V Kohli':
@@ -148,13 +149,75 @@ def win_count():
 
     percentage = (win*100/(win+lost))
 
-    print 'Matches Won : ' + str(win) 
-    print 'Matches Lost : ' + str(lost)
-    print 'No Result : ' + str(nr)
-    print 'Win Percentage : %.2f ' % (percentage)
+    print 'Matches Won : ' + str(int(win)) 
+    print 'Matches Lost : ' + str(int(lost))
+    print 'No Result : ' + str(int(nr))
+    print 'Win Percentage : %.2f%% ' % (percentage)
 
+def win_location():
+    win_home = 0.0
+    nr_home = 0.0
+    lost_home = 0.0
+    win_away = 0.0
+    nr_away = 0.0
+    lost_away = 0.0
+    percentage_home = 0.0
+    percentage_away = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+    grounds = ['Mumbai','Nagpur','Trivandrum','Lucknow','Srinagar','Chandigarh','Jaipur','Rajkot','Ahmedabad','Vadodara','Hyderabad (Deccan)','Pune','Madras','Kochi','Indore','Guwahati','Margao','Faridabad','Jammu','Patna','Chennai','Bangalore','Jamshedpur','Ranchi','Delhi','Visakhapatnam','Vijayawada','Dharamsala','Kanpur','Jalandhar','Amritsar','Kolkata','Gwalior','Jodhpur','Cuttack' ]
+    
+    for stats in newlist:
+        for ground in stats:
+            if ground[14] == 'V Kohli':
+                char = '*'
+                runs = ground[0]
+                if runs.find(char) > -1:
+                    runs = runs.replace("*", "")
+
+                if runs != 'DNB' and runs != 'TDNB':
+                    if int(runs) >= 50 and int(runs) <100 :
+                        flag = search(grounds,ground[9])
+                        if flag >= 0:
+                            res = ground[13]
+                            if res.find(strng) > -1:
+                                win_home += 1
+                            elif res.find(strng2) > -1:
+                                nr_home +=1
+                            else:
+                                lost_home += 1
+                        else:
+                            res = ground[13]
+                            if res.find(strng) > -1:
+                                win_away += 1
+                            elif res.find(strng2) > -1:
+                                nr_away +=1
+                            else:
+                                lost_away += 1
+
+    percentage_home = (win_home*100/(win_home+lost_home))
+    percentage_away = (win_away*100/(win_away+lost_away))
+
+    print 'Matches Won at home : ' + str(int(win_home))
+    print 'Matches Won away : ' + str(int(win_away)) 
+    print 'Matches Lost at home : ' + str(int(lost_home))
+    print 'Matches Lost away : ' + str(int(lost_away))
+    print 'No Result at home : ' + str(int(nr_home))
+    print 'No Result away : ' + str(int(nr_away))
+    print 'Home Win Percentage : %.2f%%' % (percentage_home)
+    print 'Away Win Percentage : %.2f%%' % (percentage_away)
+
+
+def search(list,ground):
+    for (i, v) in enumerate(list):
+       if v == ground:
+           return i
+    return -1
 
 
 if __name__ == '__main__':
     team()
+    print '\n***GENERAL CASE***\n'
     win_count()
+    print '\n***HOME OR AWAY CASE***\n'
+    win_location()
