@@ -5,12 +5,8 @@ import sys
 
 
 def team():
-    url = 'http://stats.espncricinfo.com/ci/engine/stats/index.html?class=2;home_or_away=1;home_or_away=2;home_or_away=3;result=1;result=2;result=3;result=5;spanmax1=25+Aug+2015;spanmin1=25+Aug+2011;spanval1=span;team=6;template=results;type=batting'
+
     print 'Working...please wait\n'
-    source_code = requests.get(url)
-
-
-    plain_text = source_code.text
 
     with open("html/india.html", "r") as input_file:
         plain_text = input_file.read()
@@ -307,6 +303,7 @@ if __name__ == '__main__':
     print '\n***HOME OR AWAY CASE***\n'
     win_location()
     print '\n***VERSUS CASE***\n'
+    print '\nOPPONENT - AUSTRALIA\n'
     win_against()
     print '\n***COMBINED CASE***\n'
     win_combined()
