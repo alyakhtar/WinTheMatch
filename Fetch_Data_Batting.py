@@ -16,8 +16,6 @@ def team():
     with open("Batting_data/India.html", "w") as output_file:
         output_file.write(plain_text)
 
-    soup = BeautifulSoup(plain_text, "lxml")
-
     done = 0
     i = 0
 
@@ -48,7 +46,6 @@ def player_stats(player):
     with open("Batting_data/stats_%s" % player, "w") as output_file:
         output_file.write(plain_text)
 
-    soup = BeautifulSoup(plain_text, "lxml")
 
     for tr in soup.findAll('tr', {'class': 'data1'}):
         for td in tr('td'):
