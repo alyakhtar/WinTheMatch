@@ -61,11 +61,18 @@ BOWLING
 * Winning and Score Predicting(WASP)
 
 
-
-
 ### References
 
 * ESPN cricinfo
 * ICC
 * Wikipedia
 * Michael Bailey and Stephen R. Clarke, Predicting the Match Outcome in One Day International Cricket Matches, while the Game is in Progress, The 8th Australasian Conference on Mathematics and Computers in Sport, J Sports Sci Med. 2006 Dec; 5(4): 480–487
+
+
+### TODO
+
+Variables to be worked on -
+
+https://gist.github.com/iCHAIT/c6ab056ffcf7a5cf83aa
+
+Web app using flask
