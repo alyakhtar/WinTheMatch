@@ -31,24 +31,26 @@ In these 100 matches, let us say that Shikhar Dhawan has scored half century in 
 
 SO essentially it all boils down to the following -
 
+BATTING
+=======
                 V. Kohli - Matches-100
-                            
 
 
+![alt tag](http://i.imgur.com/rtOmP8p.png)
 
+![alt tag](http://i.imgur.com/Mewns6Z.png)
 
-
-![alt tag](http://i.imgur.com/rtOmP8p.png)  ![alt tag](http://i.imgur.com/Mewns6Z.png)  
 ![alt tag](http://i.imgur.com/Sn7Foja.png)
-![alt tag](http://i.imgur.com/SWzC9xH.png)  ![alt tag](http://i.imgur.com/eO04wyz.png) 
+
+
+BOWLING
+=======
+
+![alt tag](http://i.imgur.com/SWzC9xH.png)
+
+![alt tag](http://i.imgur.com/eO04wyz.png)
+
 ![alt tag](http://i.imgur.com/xjPcCde.png)
-
-
-
-
-
-
-
 
 
 ### Programming Environment & Tools Used
@@ -67,5 +69,3 @@ SO essentially it all boils down to the following -
 * ICC
 * Wikipedia
 * Michael Bailey and Stephen R. Clarke, Predicting the Match Outcome in One Day International Cricket Matches, while the Game is in Progress, The 8th Australasian Conference on Mathematics and Computers in Sport, J Sports Sci Med. 2006 Dec; 5(4): 480–487
-
-
