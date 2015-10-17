@@ -6,7 +6,7 @@ def team():
 
     print 'Working...please wait\n'
 
-    with open("html/india.html", "r") as input_file:
+    with open("Batting_data/India.html", "r") as input_file:
         plain_text = input_file.read()
 
     soup = BeautifulSoup(plain_text, "lxml")
@@ -37,7 +37,7 @@ def team():
 
 def player_stats(player, i):
 
-    with open("html/stats_%s" % player, "r") as input_file:
+    with open("Batting_data/stats_%s" % player, "r") as input_file:
         plain_text = input_file.read()
 
     play = player_name(player, i)
@@ -81,7 +81,7 @@ def player_stats(player, i):
 
 def player_name(url, i):
 
-    with open("html/stats_%s" % url, "r") as input_file:
+    with open("Batting_data/stats_%s" % url, "r") as input_file:
         plain_text = input_file.read()
 
     soup = BeautifulSoup(plain_text, "lxml")
@@ -97,7 +97,7 @@ def player_name(url, i):
 def match_result(url):
     rand = url.split("/")
 
-    with open("html2/match_%s" % ''.join(rand), "r") as input_file:
+    with open("Batting_data/match_%s" % ''.join(rand), "r") as input_file:
         plain_text = input_file.read()
 
     soup = BeautifulSoup(plain_text, "lxml")
