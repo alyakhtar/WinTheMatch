@@ -1,113 +1,26 @@
-from bs4 import BeautifulSoup
-import sys
+import MySQLdb as mdb
+import sys, glob, os
+from warnings import filterwarnings
+
+filterwarnings('ignore', category = mdb.Warning)
 
 
-def team():
 
-    print 'Working...please wait\n'
-
-    with open("Batting_data/India.html", "r") as input_file:
-        plain_text = input_file.read()
-
-    soup = BeautifulSoup(plain_text, "lxml")
-    mat = []
+def database():
     global newlist
     newlist = []
-    i = 0
-    global done
-    done = 0
-    for tr in soup.findAll('tr', {'class': 'data1'}):
-        l = []
-        if done == 46:
-            i = 98
-        for td in tr('td'):
-            for a in td('a', {'class': 'data-link'}):
-                abc = a.get('href')
-                name = abc.split('/')
-                player_stats(name[4], i)
-            fifty = td.string
-            if fifty is not None and fifty != "\n":
-                l.append(fifty)
-        i += 2.08
-        done += 1
-        mat.append(l)
+    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    sql = "SELECT * from statistics"
+    cur = con.cursor()
 
-    print '\n\nExtraction Complete!!\n'
+    cur.execute(sql)
+
+    mt = cur.fetchall()
 
 
-def player_stats(player, i):
-
-    with open("Batting_data/stats_%s" % player, "r") as input_file:
-        plain_text = input_file.read()
-
-    play = player_name(player, i)
-    ply = []
-    ply.append(play)
-
-    soup = BeautifulSoup(plain_text, "lxml")
-
-    global mt
-    mt = []
-    res = []
-    opp = []
-
-    for tr in soup.findAll('tr', {'class': 'data1'}):
-        stat = []
-        for td in tr('td'):
-            for a in td('a', {'class': 'data-link'}):
-                str1 = '/ci/content/team/'
-                pqr = a.get('href')
-                if pqr.find(str1) > -1:
-                    pol = a.string
-                    opp.append(' '.join(pol.split()))
-            for a in td('a', {'title': 'view the scorecard for this row'}):
-                xyz = a.get('href')
-                lol = match_result(xyz)
-                res.append(lol)
-            dt = td.string
-            if dt is not None and dt != "\n":
-                stat.append(dt)
-        mt.append(stat)
-
-    mt.pop(0)
-    mt.pop(0)
-    for x in xrange(len(res)):
-        mt[x].append(opp[x])
-        mt[x].append(res[x])
-        mt[x].append(ply[0])
-
-    display(mt)
-
-
-def player_name(url, i):
-
-    with open("Batting_data/stats_%s" % url, "r") as input_file:
-        plain_text = input_file.read()
-
-    soup = BeautifulSoup(plain_text, "lxml")
-    for link in soup.findAll('h1', {'class': 'SubnavSitesection'}):
-        data = link.get_text()
-    name = data.split('/')
-    sys.stdout.write("\r[%s%s] %d%% Completed" %
-                     ('=' * done, ' ' * (47-done), i))
-    sys.stdout.flush()
-    return ' '.join(name[2].split())
-
-
-def match_result(url):
-    rand = url.split("/")
-
-    with open("Batting_data/match_%s" % ''.join(rand), "r") as input_file:
-        plain_text = input_file.read()
-
-    soup = BeautifulSoup(plain_text, "lxml")
-    for link in soup.findAll('div', {'class': 'innings-requirement'}):
-        data = link.string
-        return ' '.join(data.split())
-
-
-def display(list):
-    newlist.append(list)
+    for row in mt:
+        newlist.append(row)       
+   
 
 
 def win_count():
@@ -119,23 +32,23 @@ def win_count():
     strng = 'India won'
     strng2 = 'No result'
 
-    for stats in newlist:
-        for name in stats:
-            if name[14] == 'V Kohli':
-                char = '*'
-                runs = name[0]
-                if runs.find(char) > -1:
-                    runs = runs.replace("*", "")
 
-                if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= 50 and int(runs) < 100:
-                        res = name[13]
-                        if res.find(strng) > -1:
-                            win += 1
-                        elif res.find(strng2) > -1:
-                            nr += 1
-                        else:
-                            lost += 1
+    for name in newlist :
+        if name[15] == 'V Kohli':
+            char = '*'
+            runs = name[1]
+            if runs.find(char) > -1:
+                runs = runs.replace("*", "")
+
+            if runs != 'DNB' and runs != 'TDNB':
+                if int(runs) >= 30:
+                    res = name[14]
+                    if res.find(strng) > -1:
+                        win += 1
+                    elif res.find(strng2) > -1:
+                        nr += 1
+                    else:
+                        lost += 1
 
     percentage = (win*100/(win+lost))
 
@@ -159,33 +72,33 @@ def win_location():
     grounds = ['Mumbai', 'Nagpur', 'Trivandrum', 'Lucknow', 'Srinagar', 'Chandigarh', 'Jaipur', 'Rajkot', 'Ahmedabad', 'Vadodara',
                'Hyderabad (Deccan)', 'Pune', 'Madras', 'Kochi', 'Indore', 'Guwahati', 'Margao', 'Faridabad', 'Jammu', 'Patna', 'Chennai', 'Bangalore', 'Jamshedpur', 'Ranchi', 'Delhi', 'Visakhapatnam', 'Vijayawada', 'Dharamsala', 'Kanpur', 'Jalandhar', 'Amritsar', 'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
 
-    for stats in newlist:
-        for ground in stats:
-            if ground[14] == 'V Kohli':
-                char = '*'
-                runs = ground[0]
-                if runs.find(char) > -1:
-                    runs = runs.replace("*", "")
+    
+    for ground in newlist:
+        if ground[15] == 'V Kohli':
+            char = '*'
+            runs = ground[1]
+            if runs.find(char) > -1:
+                runs = runs.replace("*", "")
 
-                if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= 50 and int(runs) < 100:
-                        flag = search(grounds, ground[9])
-                        if flag >= 0:
-                            res = ground[13]
-                            if res.find(strng) > -1:
-                                win_home += 1
-                            elif res.find(strng2) > -1:
-                                nr_home += 1
-                            else:
-                                lost_home += 1
+            if runs != 'DNB' and runs != 'TDNB':
+                if int(runs) >= 30 and int(runs) < 100:
+                    flag = search(grounds, ground[10])
+                    if flag >= 0:
+                        res = ground[14]
+                        if res.find(strng) > -1:
+                            win_home += 1
+                        elif res.find(strng2) > -1:
+                            nr_home += 1
                         else:
-                            res = ground[13]
-                            if res.find(strng) > -1:
-                                win_away += 1
-                            elif res.find(strng2) > -1:
-                                nr_away += 1
-                            else:
-                                lost_away += 1
+                            lost_home += 1
+                    else:
+                        res = ground[14]
+                        if res.find(strng) > -1:
+                            win_away += 1
+                        elif res.find(strng2) > -1:
+                            nr_away += 1
+                        else:
+                            lost_away += 1
 
     percentage_home = (win_home*100/(win_home+lost_home))
     percentage_away = (win_away*100/(win_away+lost_away))
@@ -209,24 +122,24 @@ def win_against():
     strng = 'India won'
     strng2 = 'No result'
 
-    for stats in newlist:
-        for name in stats:
-            if name[14] == 'V Kohli':
-                if name[12] == 'Australia':
-                    char = '*'
-                    runs = name[0]
-                    if runs.find(char) > -1:
-                        runs = runs.replace("*", "")
+    
+    for name in newlist:
+        if name[15] == 'V Kohli':
+            if name[13] == 'Australia':
+                char = '*'
+                runs = name[1]
+                if runs.find(char) > -1:
+                    runs = runs.replace("*", "")
 
-                    if runs != 'DNB' and runs != 'TDNB':
-                        if int(runs) >= 50 and int(runs) < 100:
-                            res = name[13]
-                            if res.find(strng) > -1:
-                                win += 1
-                            elif res.find(strng2) > -1:
-                                nr += 1
-                            else:
-                                lost += 1
+                if runs != 'DNB' and runs != 'TDNB':
+                    if int(runs) >= 50 and int(runs) < 100:
+                        res = name[14]
+                        if res.find(strng) > -1:
+                            win += 1
+                        elif res.find(strng2) > -1:
+                            nr += 1
+                        else:
+                            lost += 1
 
     percentage = (win*100/(win+lost))
 
@@ -250,34 +163,34 @@ def win_combined():
     grounds = ['Mumbai', 'Nagpur', 'Trivandrum', 'Lucknow', 'Srinagar', 'Chandigarh', 'Jaipur', 'Rajkot', 'Ahmedabad', 'Vadodara',
                'Hyderabad (Deccan)', 'Pune', 'Madras', 'Kochi', 'Indore', 'Guwahati', 'Margao', 'Faridabad', 'Jammu', 'Patna', 'Chennai', 'Bangalore', 'Jamshedpur', 'Ranchi', 'Delhi', 'Visakhapatnam', 'Vijayawada', 'Dharamsala', 'Kanpur', 'Jalandhar', 'Amritsar', 'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
 
-    for stats in newlist:
-        for ground in stats:
-            if ground[14] == 'V Kohli':
-                if ground[12] == 'Australia':
-                    char = '*'
-                    runs = ground[0]
-                    if runs.find(char) > -1:
-                        runs = runs.replace("*", "")
 
-                    if runs != 'DNB' and runs != 'TDNB':
-                        if int(runs) >= 50 and int(runs) < 100:
-                            flag = search(grounds, ground[9])
-                            if flag >= 0:
-                                res = ground[13]
-                                if res.find(strng) > -1:
-                                    win_home += 1
-                                elif res.find(strng2) > -1:
-                                    nr_home += 1
-                                else:
-                                    lost_home += 1
+    for ground in newlist:
+        if ground[15] == 'V Kohli':
+            if ground[13] == 'Australia':
+                char = '*'
+                runs = ground[1]
+                if runs.find(char) > -1:
+                    runs = runs.replace("*", "")
+
+                if runs != 'DNB' and runs != 'TDNB':
+                    if int(runs) >= 50 and int(runs) < 100:
+                        flag = search(grounds, ground[10])
+                        if flag >= 0:
+                            res = ground[14]
+                            if res.find(strng) > -1:
+                                win_home += 1
+                            elif res.find(strng2) > -1:
+                                nr_home += 1
                             else:
-                                res = ground[13]
-                                if res.find(strng) > -1:
-                                    win_away += 1
-                                elif res.find(strng2) > -1:
-                                    nr_away += 1
-                                else:
-                                    lost_away += 1
+                                lost_home += 1
+                        else:
+                            res = ground[14]
+                            if res.find(strng) > -1:
+                                win_away += 1
+                            elif res.find(strng2) > -1:
+                                nr_away += 1
+                            else:
+                                lost_away += 1
 
     percentage_home = (win_home*100/(win_home+lost_home))
     percentage_away = (win_away*100/(win_away+lost_away))
@@ -291,6 +204,54 @@ def win_combined():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
+def double_half_century():
+  char = '*'
+  win = 0.0
+  nr = 0.0
+  lost = 0.0
+  percentage = 0.0
+  strng = 'India won'
+  strng2 = 'No result'
+
+
+  
+  for ground in newlist:
+      runs = ground[1]
+      if runs.find(char) > -1:
+          runs = runs.replace("*", "")
+      if runs != 'DNB' and runs != 'TDNB':
+          if int(runs) >= 50 and int(runs) < 100:
+              player1 = ground[15]
+              match = ground[12]
+              runsnew = check_50(player1,match)
+              if runsnew == 1:
+                res = ground[14]
+                if res.find(strng) > -1:
+                    win += 1
+                elif res.find(strng2) > -1:
+                    nr += 1
+                else:
+                    lost += 1
+
+  percentage = ((win*100)/(win+lost))
+
+  print 'Win Percentage : %.2f%% ' % (percentage)
+                         
+
+def check_50(player,match):
+  char = '*'
+  
+  for name in newlist:
+      if name[15]!= player:
+          if name[12] == match:
+              runsnew = name[1] 
+              if runsnew.find(char) > -1:
+                runsnew = runsnew.replace("*", "")                   
+              if runsnew != 'DNB' and runsnew != 'TDNB':                         
+                if int(runsnew) >= 50 and int(runsnew) < 100:
+                  return 1
+  return 0
+
 
 def search(list, ground):
     for (i, v) in enumerate(list):
@@ -300,7 +261,7 @@ def search(list, ground):
 
 
 if __name__ == '__main__':
-    team()
+    database()
     print '\n***GENERAL CASE***\n'
     win_count()
     print '\n***HOME OR AWAY CASE***\n'
@@ -310,3 +271,5 @@ if __name__ == '__main__':
     win_against()
     print '\n***COMBINED CASE***\n'
     win_combined()
+    print '\n***DOUBLE FIFTIES***\n'
+    double_half_century()
