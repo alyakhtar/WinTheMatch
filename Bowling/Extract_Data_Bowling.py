@@ -1,5 +1,3 @@
-import requests
-from tabulate import tabulate
 from bs4 import BeautifulSoup
 import sys
 from math import ceil
@@ -40,22 +38,22 @@ def team():
     print '\n\nExtraction Complete!!\n'
 
 
-def player_stats(player, i ):
+def player_stats(player, i):
 
     with open("Bowling_data/stats_%s" % player, "r") as input_file:
         plain_text = input_file.read()
 
     play = player_name(player, i)
     ply = []
-    ply.append(play)    
+    ply.append(play)
 
     soup = BeautifulSoup(plain_text, "lxml")
-    
+
     global mt
     mt = []
     res = []
     opp = []
-    fo = open("bowling_file.txt" , "a")
+    fo = open("bowling_file.txt", "a")
     for tr in soup.findAll('tr', {'class': 'data1'}):
         stat = []
         for td in tr('td'):
@@ -63,7 +61,7 @@ def player_stats(player, i ):
                 str1 = '/ci/content/team/'
                 pqr = a.get('href')
                 if pqr.find(str1) > -1:
-                    pol = a.string                    
+                    pol = a.string
                     opp.append(' '.join(pol.split()))
             for a in td('a', {'title': 'view the scorecard for this row'}):
                 xyz = a.get('href')
@@ -83,7 +81,7 @@ def player_stats(player, i ):
 
     # fo.write (tabulate(mt,tablefmt="fancy_grid").encode("utf8"))
     display(mt)
-    
+
 
 def player_name(url, i):
 
@@ -98,13 +96,12 @@ def player_name(url, i):
                      ('=' * done, ' ' * (47-done), i))
     sys.stdout.flush()
     return ' '.join(name[2].split())
-    
 
 
 def match_result(url):
     rand = url.split("/")
-    
-    with open("Bowling_data/match_%s" % ''.join(rand) , "r") as input_file:
+
+    with open("Bowling_data/match_%s" % ''.join(rand), "r") as input_file:
         plain_text = input_file.read()
 
     soup = BeautifulSoup(plain_text, "lxml")
@@ -112,9 +109,9 @@ def match_result(url):
         data = link.string
         return ' '.join(data.split())
 
+
 def display(list):
     newlist.append(list)
-
 
 
 def win_economy():
@@ -134,19 +131,19 @@ def win_economy():
                 # if economy.find(char) > -1:
                 #     economy = economy.replace("-", "")
 
-                if economy != '-' :
+                if economy != '-':
                     if int(economy) <= 4.0:
                         res = name[11]
                         if res.find(strng) > -1:
                             win += 1
                         elif res.find(strng2) > -1:
-                            nr +=1
+                            nr += 1
                         else:
                             lost += 1
 
     percentage = (win*100/(win+lost))
 
-    print 'Matches Won : ' + str(int(win)) 
+    print 'Matches Won : ' + str(int(win))
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (ceil(percentage))
@@ -160,34 +157,35 @@ def win_runs():
     percentage = 0.0
     strng = 'India won'
     strng2 = 'No result'
-    
+
     for stats in newlist:
         for name in stats:
             if name[12] == 'Mohammed Shami':
                 runs = name[2]
                 if runs != '-':
-                    if int(runs) <= 40  :
+                    if int(runs) <= 40:
                         res = name[11]
                         if res.find(strng) > -1:
                             win += 1
                         elif res.find(strng2) > -1:
-                            nr +=1
+                            nr += 1
                         else:
                             lost += 1
 
     percentage = (win*100/(win+lost))
 
-    print 'Matches Won : ' + str(int(win)) 
+    print 'Matches Won : ' + str(int(win))
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
 
-def search(list,ground):
+def search(list, ground):
     for (i, v) in enumerate(list):
-       if v == ground:
-           return i
+        if v == ground:
+            return i
     return -1
+
 
 def win_spinners():
     runs = 0
@@ -198,19 +196,18 @@ def win_spinners():
     strng = 'India won'
     strng2 = 'No result'
     odi_no = []
-    
+
     for stats in newlist:
         for name in stats:
             if name[12] == 'R Ashwin':
-              odi_no.append(name[9])
+                odi_no.append(name[9])
 
     print odi_no
-            # if name[12] == 'RA Jadeja':
-
+    # if name[12] == 'RA Jadeja':
 
     # percentage = (win*100/(win+lost))
 
-    # print 'Matches Won : ' + str(int(win)) 
+    # print 'Matches Won : ' + str(int(win))
     # print 'Matches Lost : ' + str(int(lost))
     # print 'No Result : ' + str(int(nr))
     # print 'Win Percentage : %.2f ' % (percentage)
