@@ -1,6 +1,11 @@
-body{
+.main{
     background:url('http://www.livebatball.com/wp-content/uploads/2014/12/1-Melbourne-Cricket-Ground-41.jpg');
     /*background:lavender; */
+    padding:40px;
+}
+
+body{
+
     padding:40px;
 }
 
@@ -14,7 +19,7 @@ body{
     background-color:rgba(255,255,255,.8);
 }
 #login-dp .help-block{
-    font-size:12px    
+    font-size:12px
 }
 #login-dp .bottom{
     background-color:rgba(255,255,255,.8);
@@ -23,7 +28,7 @@ body{
     padding:14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0    
+    margin:12px 0
 }
 #login-dp .social-buttons a{
     width: 49%;
@@ -37,7 +42,7 @@ body{
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc 
+    background-color:#496ebc
 }
 .btn-tw{
     color: #fff;
