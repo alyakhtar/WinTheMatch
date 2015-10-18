@@ -68,10 +68,42 @@
   </div>
 </nav>
 
-  {% for p in player %}
-    <p><h4>{{ p }}</h4></p>
-    <br>
-  {% endfor %}
+<h3>Select Batsmen :</h3>
+
+<form name="Item_1" action="results.html" method='POST'>
+    <select name="Item_1">
+      {% for plyr in player %}
+        <option value="batsmen">
+          {{ plyr }}
+        </option>
+      {% endfor %}
+    </select>
+</form>
+
+<h3>Select Ground :</h3>
+
+<form name="Item_1" action="results.html" method='POST'>
+    <select name="Item_1">
+      {% for groun in ground %}
+        <option value="batsmen">
+          {{ groun }}
+        </option>
+      {% endfor %}
+    </select>
+</form>
+
+<h3>Select Opponent :</h3>
+
+<form name="Item_1" action="results.html" method='POST'>
+    <select name="Item_1">
+      {% for opp in opponent %}
+        <option value="batsmen">
+          {{ opp }}
+        </option>
+      {% endfor %}
+    </select>
+</form>
+
 
 <footer>
   &copy Jamians

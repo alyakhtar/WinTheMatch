@@ -41,7 +41,11 @@ def batting():
         cursor = mysql.connect().cursor()
         cursor.execute("SELECT DISTINCT(Player) from batting_statistics")
         player = cursor.fetchall()
-        return render_template('batting.html', player=player)
+        cursor.execute("SELECT DISTINCT(Ground) from batting_statistics")
+        ground = cursor.fetchall()
+        cursor.execute("SELECT DISTINCT(Opposition) from batting_statistics")
+        opponent = cursor.fetchall()
+        return render_template('batting.html', player=player, ground=ground, opponent=opponent)
 
 
 @app.route("/bowling", methods=['POST', 'GET'])

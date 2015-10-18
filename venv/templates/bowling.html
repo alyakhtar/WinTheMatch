@@ -68,10 +68,17 @@
   </div>
 </nav>
 
-{% for p in player %}
-  <p><h4>{{ p }}</h4></p>
-  <br>
-{% endfor %}
+<h3>Select Bowler :</h3>
+
+<form name="Item_1" action="results.html" method='POST'>
+    <select name="Item_1">
+      {% for p in player %}
+        <option value="batsmen">
+          {{ p }}
+        </option>
+      {% endfor %}
+    </select>
+</form>
 
 <footer>
   &copy Jamians
