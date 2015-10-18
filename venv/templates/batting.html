@@ -68,11 +68,16 @@
   </div>
 </nav>
 
+  {% for p in player %}
+    <p><h4>{{ p }}</h4></p>
+    <br>
+  {% endfor %}
+
 <footer>
   &copy Jamians
 </footer>
 </body>
+
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
-</body>
 </html>

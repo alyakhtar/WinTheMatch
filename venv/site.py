@@ -13,10 +13,6 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 mysql.init_app(app)
 
-conn = mysql.connect()
-
-cursor = conn.cursor()
-
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -39,14 +35,23 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/batting")
+@app.route("/batting", methods=['POST', 'GET'])
 def batting():
-    return render_template('batting.html')
+    if request.method == 'GET':
+        cursor = mysql.connect().cursor()
+        cursor.execute("SELECT DISTINCT(Player) from batting_statistics")
+        player = cursor.fetchall()
+        return render_template('batting.html', player=player)
 
 
-@app.route("/bowling")
+@app.route("/bowling", methods=['POST', 'GET'])
 def bowling():
-    return render_template('bowling.html')
+    if request.method == 'GET':
+        cursor = mysql.connect().cursor()
+        cursor.execute("SELECT DISTINCT(PLayer) from bowling_statistics")
+        player = cursor.fetchall()
+        return render_template('bowling.html', player=player)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
