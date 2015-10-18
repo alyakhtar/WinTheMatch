@@ -1,9 +1,11 @@
 from bs4 import BeautifulSoup
 import MySQLdb as mdb
-import sys, glob, os
+import sys
+import glob
+import os
 from warnings import filterwarnings
 
-filterwarnings('ignore', category = mdb.Warning)
+filterwarnings('ignore', category=mdb.Warning)
 
 
 def team():
@@ -80,16 +82,16 @@ def player_stats(player, i):
         mt[x].append(res[x])
         mt[x].append(ply[0])
 
-
     con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
     with con:
         cur = con.cursor()
         # cur.execute("DROP TABLE IF EXISTS statistics")
-        cur.execute("CREATE TABLE IF NOT EXISTS statistics(Id INT PRIMARY KEY AUTO_INCREMENT, Runs VARCHAR(25) , Mins VARCHAR(25), BF VARCHAR(25), 4s VARCHAR(25), 6s VARCHAR(25), SR VARCHAR(25), POS VARCHAR(25), Dismissal VARCHAR(25), Inns VARCHAR(25), Ground VARCHAR(25), Start_Date VARCHAR(25), ODI_NO VARCHAR(25), Opposition VARCHAR(25), Result VARCHAR(150), Player VARCHAR(30))")
+        cur.execute(
+            "CREATE TABLE IF NOT EXISTS statistics(Id INT PRIMARY KEY AUTO_INCREMENT, Runs VARCHAR(25) , Mins VARCHAR(25), BF VARCHAR(25), 4s VARCHAR(25), 6s VARCHAR(25), SR VARCHAR(25), POS VARCHAR(25), Dismissal VARCHAR(25), Inns VARCHAR(25), Ground VARCHAR(25), Start_Date VARCHAR(25), ODI_NO VARCHAR(25), Opposition VARCHAR(25), Result VARCHAR(150), Player VARCHAR(30))")
 
         for row in mt:
-            cur.execute("""INSERT INTO statistics (Runs,Mins,BF,4s,6s,SR,POS,Dismissal,Inns,Ground,Start_Date,ODI_NO,Opposition,Result,Player) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14]))
-
+            cur.execute("""INSERT INTO statistics (Runs,Mins,BF,4s,6s,SR,POS,Dismissal,Inns,Ground,Start_Date,ODI_NO,Opposition,Result,Player) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (row[
+                        0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]))
 
 
 def player_name(url, i):
@@ -118,7 +120,11 @@ def match_result(url):
         data = link.string
         return ' '.join(data.split())
 
+<<<<<<< HEAD
 
 
 if __name__ == '__main__':
     team()
+=======
+team()
+>>>>>>> c49cc7a61d233b008f35628240dc4f135fc1d48e

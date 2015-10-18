@@ -1,9 +1,10 @@
 import MySQLdb as mdb
-import sys, glob, os
+import sys
+import glob
+import os
 from warnings import filterwarnings
 
-filterwarnings('ignore', category = mdb.Warning)
-
+filterwarnings('ignore', category=mdb.Warning)
 
 #Connection to the database and storing data in a list
 def database():
@@ -17,10 +18,8 @@ def database():
 
     mt = cur.fetchall()
 
-
     for row in mt:
-        newlist.append(row)       
-   
+        newlist.append(row)
 
 #Player scores more than 30 runs in a match
 def win_count():
@@ -32,8 +31,7 @@ def win_count():
     strng = 'India won'
     strng2 = 'No result'
 
-
-    for name in newlist :
+    for name in newlist:
         if name[15] == 'V Kohli':
             char = '*'
             runs = name[1]
@@ -72,7 +70,6 @@ def win_location():
     grounds = ['Mumbai', 'Nagpur', 'Trivandrum', 'Lucknow', 'Srinagar', 'Chandigarh', 'Jaipur', 'Rajkot', 'Ahmedabad', 'Vadodara',
                'Hyderabad (Deccan)', 'Pune', 'Madras', 'Kochi', 'Indore', 'Guwahati', 'Margao', 'Faridabad', 'Jammu', 'Patna', 'Chennai', 'Bangalore', 'Jamshedpur', 'Ranchi', 'Delhi', 'Visakhapatnam', 'Vijayawada', 'Dharamsala', 'Kanpur', 'Jalandhar', 'Amritsar', 'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
 
-    
     for ground in newlist:
         if ground[15] == 'V Kohli':
             char = '*'
@@ -122,7 +119,6 @@ def win_against():
     strng = 'India won'
     strng2 = 'No result'
 
-    
     for name in newlist:
         if name[15] == 'V Kohli':
             if name[13] == 'Australia':
@@ -162,7 +158,6 @@ def win_combined():
     strng2 = 'No result'
     grounds = ['Mumbai', 'Nagpur', 'Trivandrum', 'Lucknow', 'Srinagar', 'Chandigarh', 'Jaipur', 'Rajkot', 'Ahmedabad', 'Vadodara',
                'Hyderabad (Deccan)', 'Pune', 'Madras', 'Kochi', 'Indore', 'Guwahati', 'Margao', 'Faridabad', 'Jammu', 'Patna', 'Chennai', 'Bangalore', 'Jamshedpur', 'Ranchi', 'Delhi', 'Visakhapatnam', 'Vijayawada', 'Dharamsala', 'Kanpur', 'Jalandhar', 'Amritsar', 'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
-
 
     for ground in newlist:
         if ground[15] == 'V Kohli':
@@ -205,6 +200,7 @@ def win_combined():
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
 
+<<<<<<< HEAD
 #Two players score half centuries each
 def double_half_century():
   char = '*'
@@ -254,6 +250,53 @@ def check_50(player,match):
                   return 1
                   break
   return 0
+=======
+def double_half_century():
+    char = '*'
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
+    percentage = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+
+    for ground in newlist:
+        runs = ground[1]
+        if runs.find(char) > -1:
+            runs = runs.replace("*", "")
+        if runs != 'DNB' and runs != 'TDNB':
+            if int(runs) >= 50 and int(runs) < 100:
+                player1 = ground[15]
+                match = ground[12]
+                runsnew = check_50(player1, match)
+                if runsnew == 1:
+                    res = ground[14]
+                    if res.find(strng) > -1:
+                        win += 1
+                    elif res.find(strng2) > -1:
+                        nr += 1
+                    else:
+                        lost += 1
+
+    percentage = ((win*100)/(win+lost))
+
+    print 'Win Percentage : %.2f%% ' % (percentage)
+
+
+def check_50(player, match):
+    char = '*'
+
+    for name in newlist:
+        if name[15] != player:
+            if name[12] == match:
+                runsnew = name[1]
+                if runsnew.find(char) > -1:
+                    runsnew = runsnew.replace("*", "")
+                if runsnew != 'DNB' and runsnew != 'TDNB':
+                    if int(runsnew) >= 50 and int(runsnew) < 100:
+                        return 1
+    return 0
+>>>>>>> c49cc7a61d233b008f35628240dc4f135fc1d48e
 
 
 #A player in a match scores a century
