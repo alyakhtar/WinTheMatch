@@ -405,8 +405,7 @@ def team_total():
 
     for row in mt:
         for match in row:
-            cur.execute(
-                """SELECT Runs FROM statistics where ODI_NO = %s""", (str(match)))
+            cur.execute("""SELECT Runs FROM statistics where ODI_NO = %s""", (str(match)))
 
             pl = cur.fetchall()
 
@@ -418,8 +417,7 @@ def team_total():
                         total += int(runs)
 
             if total >= 250:
-                cur.execute(
-                    """SELECT DISTINCT Result FROM statistics WHERE ODI_NO = %s""", (str(match)))
+                cur.execute("""SELECT DISTINCT Result FROM statistics WHERE ODI_NO = %s""", (str(match)))
                 res = cur.fetchone()
 
                 for a in res:
@@ -436,6 +434,7 @@ def team_total():
     print 'Win Percentage : %.2f%% ' % (percentage)
 
 
+#searching in list
 def search(list, ground):
     for (i, v) in enumerate(list):
         if v == ground:
@@ -443,6 +442,7 @@ def search(list, ground):
     return -1
 
 
+#main
 if __name__ == '__main__':
     database()
     print '\n***GENERAL CASE***\n'
