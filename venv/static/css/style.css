@@ -1,5 +1,5 @@
 .main{
-    background:url('static/img/background.jpg');
+    background:url('/static/img/background.jpg');
     padding:40px;
 }
 
