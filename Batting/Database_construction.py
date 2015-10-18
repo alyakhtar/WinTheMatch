@@ -122,5 +122,3 @@ def match_result(url):
 
 if __name__ == '__main__':
     team()
-
-team()
