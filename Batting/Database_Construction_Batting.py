@@ -82,7 +82,7 @@ def player_stats(player, i):
         mt[x].append(res[x])
         mt[x].append(ply[0])
 
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     with con:
         cur = con.cursor()
         cur.execute(
@@ -121,7 +121,7 @@ def match_result(url):
 
 
 if __name__ == '__main__':
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     cur = con.cursor()
     cur.execute("DROP TABLE IF EXISTS batting_statistics")
     team()

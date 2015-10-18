@@ -1,8 +1,32 @@
 from flask import Flask, request, render_template
-from flask.ext.mysqldb import MySQL
+from flaskext.mysql import MySQL
+
+
+mysql = MySQL()
 
 app = Flask(__name__)
-mysql = MySQL(app)
+
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'adityagupta'
+app.config['MYSQL_DATABASE_DB'] = 'cricket'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+
+mysql.init_app(app)
+
+conn = mysql.connect()
+
+cursor = conn.cursor()
+
+
+@app.route("/login", methods=['POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['UserName']
+        password = request.form['Password']
+        if username == "admin" and password == "admin":
+            return render_template('login_success.html')
+        else:
+            return render_template('login_error.html')
 
 
 @app.route("/")
@@ -15,13 +39,9 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/batting", methods=['POST', 'GET'])
+@app.route("/batting")
 def batting():
-    if request.method == 'GET':
-        cur = mysql.connection.cursor()
-        cur.execute('''SELECT user, host FROM mysql.user''')
-        rv = cur.fetchall()
-        return render_template('batting.html', str(rv))
+    return render_template('batting.html')
 
 
 @app.route("/bowling")
