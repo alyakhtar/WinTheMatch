@@ -119,3 +119,5 @@ def match_result(url):
     for link in soup.findAll('div', {'class': 'innings-requirement'}):
         data = link.string
         return ' '.join(data.split())
+
+team()
