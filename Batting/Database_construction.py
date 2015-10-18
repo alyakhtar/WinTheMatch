@@ -80,8 +80,7 @@ def player_stats(player, i):
         mt[x].append(res[x])
         mt[x].append(ply[0])
 
-
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     with con:
         cur = con.cursor()
         cur.execute("CREATE TABLE IF NOT EXISTS batting_statistics(Id INT PRIMARY KEY AUTO_INCREMENT, Runs VARCHAR(25) , Mins VARCHAR(25), BF VARCHAR(25), 4s VARCHAR(25), 6s VARCHAR(25), SR VARCHAR(25), POS VARCHAR(25), Dismissal VARCHAR(25), Inns VARCHAR(25), Ground VARCHAR(25), Start_Date VARCHAR(25), ODI_NO VARCHAR(25), Opposition VARCHAR(25), Result VARCHAR(150), Player VARCHAR(30))")

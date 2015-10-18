@@ -1,5 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
+from flask.ext.mysqldb import MySQL
+
 app = Flask(__name__)
+mysql = MySQL(app)
 
 
 @app.route("/")
@@ -12,9 +15,13 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/batting")
+@app.route("/batting", methods=['POST', 'GET'])
 def batting():
-    return render_template('batting.html')
+    if request.method == 'GET':
+        cur = mysql.connection.cursor()
+        cur.execute('''SELECT user, host FROM mysql.user''')
+        rv = cur.fetchall()
+        return render_template('batting.html', str(rv))
 
 
 @app.route("/bowling")
