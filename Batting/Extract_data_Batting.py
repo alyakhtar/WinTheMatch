@@ -5,7 +5,7 @@ from warnings import filterwarnings
 filterwarnings('ignore', category = mdb.Warning)
 
 
-
+#Connection to the database and storing data in a list
 def database():
     global newlist
     newlist = []
@@ -22,7 +22,7 @@ def database():
         newlist.append(row)       
    
 
-
+#Player scores more than 30 runs in a match
 def win_count():
     runs = 0
     win = 0.0
@@ -57,7 +57,7 @@ def win_count():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
-
+#Match is being played in home or away condition
 def win_location():
     win_home = 0.0
     nr_home = 0.0
@@ -112,7 +112,7 @@ def win_location():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
-
+#Match being played against a specific team
 def win_against():
     runs = 0
     win = 0.0
@@ -148,7 +148,7 @@ def win_against():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f%% ' % (percentage)
 
-
+#combination of runs scores, home or away condition and oppositipon
 def win_combined():
     win_home = 0.0
     nr_home = 0.0
@@ -204,6 +204,8 @@ def win_combined():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
+
+#Two players score half centuries each
 def double_half_century():
   char = '*'
   win = 0.0
@@ -250,7 +252,181 @@ def check_50(player,match):
               if runsnew != 'DNB' and runsnew != 'TDNB':                         
                 if int(runsnew) >= 50 and int(runsnew) < 100:
                   return 1
+                  break
   return 0
+
+
+#A player in a match scores a century
+def century():
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
+    percentage = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+
+    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    sql = 'SELECT DISTINCT ODI_NO FROM statistics'
+    cur = con.cursor()
+
+    cur.execute(sql)
+
+    mt = cur.fetchall()
+
+    for row in mt:
+        for match in row: 
+            cur.execute("""SELECT Player FROM statistics where ODI_NO = %s""", (str(match)))
+
+            pl = cur.fetchall()
+
+            flag = check_century(pl,match)
+
+            if flag == 1:
+                cur.execute("""SELECT DISTINCT Result FROM statistics WHERE ODI_NO = %s""",(str(match)))
+                res = cur.fetchone()
+
+                for a in res:
+                    rest = a
+                if rest.find(strng) > -1:
+                    win += 1
+                elif rest.find(strng2) > -1:
+                    nr += 1
+                else:
+                    lost += 1
+
+    percentage = ((win*100)/(win+lost))
+
+    print 'Win Percentage : %.2f%% ' % (percentage)
+
+
+
+def check_century(list,odi):
+    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    cur = con.cursor()
+
+    char = '*'
+
+    for name in list:
+        for player in name:
+            cur.execute("""SELECT Runs from statistics where Player = %s and ODI_NO = %s""",(str(player),str(odi)))
+
+            runs = cur.fetchone()
+
+            for a in runs:
+                run = a
+
+            if run.find(char) > -1:
+                run = run.replace("*", "")
+
+            if run != 'DNB' and run != 'TDNB':
+                if int(run) >= 100:
+                    return 1
+                    break
+    return 0
+
+
+#Two players score together more than 80 runs
+def combined_score():
+    char = '*'
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
+    percentage = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+
+
+  
+    for ground in newlist:
+        runs = ground[1]
+        if runs.find(char) > -1:
+            runs = runs.replace("*", "")
+        if runs != 'DNB' and runs != 'TDNB':
+            player1 = ground[15]
+            match = ground[12]
+            runsnew = check_combined(player1,match,runs)
+            if runsnew == 1:
+                res = ground[14]
+            if res.find(strng) > -1:
+                win += 1
+            elif res.find(strng2) > -1:
+                nr += 1
+            else:
+                lost += 1
+
+    percentage = ((win*100)/(win+lost))
+
+    print 'Win Percentage : %.2f%% ' % (percentage)
+
+
+def check_combined(player,match,p1runs):
+    char = '*'
+    total = 0
+
+    for name in newlist:
+        if name[15]!= player:
+            if name[12] == match:
+                runsnew = name[1] 
+                if runsnew.find(char) > -1:
+                    runsnew = runsnew.replace("*", "")                   
+                if runsnew != 'DNB' and runsnew != 'TDNB':    
+                    total = int(p1runs)+int(runsnew)                     
+                    if total >= 80 :
+                        return 1
+                        break
+    return 0
+
+
+#Total team score more than 250
+def team_total():
+    total = 0
+    char = '*'
+    win = 0.0
+    nr = 0.0
+    lost = 0.0
+    percentage = 0.0
+    strng = 'India won'
+    strng2 = 'No result'
+
+    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    sql = 'SELECT DISTINCT ODI_NO FROM statistics'
+    cur = con.cursor()
+
+    cur.execute(sql)
+
+    mt = cur.fetchall()
+
+    for row in mt:
+        for match in row: 
+            cur.execute("""SELECT Runs FROM statistics where ODI_NO = %s""", (str(match)))
+
+            pl = cur.fetchall()
+
+            for row in pl:
+                for runs in row:
+                    if runs.find(char) > -1:
+                        runs = runs.replace("*", "")
+                    if runs != 'DNB' and runs != 'TDNB':
+                        total += int(runs)
+
+            if total >= 250:
+                cur.execute("""SELECT DISTINCT Result FROM statistics WHERE ODI_NO = %s""",(str(match)))
+                res = cur.fetchone()
+
+                for a in res:
+                    rest = a
+                if rest.find(strng) > -1:
+                    win += 1
+                elif rest.find(strng2) > -1:
+                    nr += 1
+                else:
+                    lost += 1
+
+    percentage = ((win*100)/(win+lost))
+
+    print 'Win Percentage : %.2f%% ' % (percentage)
+
+
 
 
 def search(list, ground):
@@ -273,3 +449,9 @@ if __name__ == '__main__':
     win_combined()
     print '\n***DOUBLE FIFTIES***\n'
     double_half_century()
+    print '\n***CENTURY***\n'
+    century()
+    print '\n***SCORE MORE THAN 80 TOGETHER***\n'
+    combined_score()
+    print '\n***TOTAL SCORE MORE THAN 250***\n'
+    team_total()
