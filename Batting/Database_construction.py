@@ -120,4 +120,11 @@ def match_result(url):
         data = link.string
         return ' '.join(data.split())
 
+<<<<<<< HEAD
+
+
+if __name__ == '__main__':
+    team()
+=======
 team()
+>>>>>>> c49cc7a61d233b008f35628240dc4f135fc1d48e
