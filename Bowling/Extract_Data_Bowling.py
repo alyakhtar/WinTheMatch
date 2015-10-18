@@ -3,7 +3,9 @@ import sys
 from math import ceil
 import MySQLdb as mdb
 
-#connection to database
+# connection to database
+
+
 def database():
     global newlist
     newlist = []
@@ -15,11 +17,12 @@ def database():
 
     mt = cur.fetchall()
 
-
     for row in mt:
         newlist.append(row)
 
-#Percentage based on economy of bowler
+# Percentage based on economy of bowler
+
+
 def win_economy():
     economy = 0.0
     win = 0.0
@@ -29,7 +32,6 @@ def win_economy():
     strng = 'India won'
     strng2 = 'No result'
 
-    
     for name in newlist:
         if name[13] == 'R Ashwin':
             # char = '-'
@@ -55,7 +57,7 @@ def win_economy():
     print 'Win Percentage : %.2f ' % (ceil(percentage))
 
 
-#Percentage based on runs conceded by the bowler
+# Percentage based on runs conceded by the bowler
 def win_runs():
     runs = 0
     win = 0.0
@@ -65,7 +67,6 @@ def win_runs():
     strng = 'India won'
     strng2 = 'No result'
 
-    
     for name in newlist:
         if name[13] == 'Mohammed Shami':
             runs = name[3]
@@ -86,7 +87,9 @@ def win_runs():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
-#searching in a list
+# searching in a list
+
+
 def search(list, ground):
     for (i, v) in enumerate(list):
         if v == ground:
@@ -94,7 +97,7 @@ def search(list, ground):
     return -1
 
 
-#Spinners combined wickets
+# Spinners combined wickets
 def win_spinners():
     win = 0.0
     nr = 0.0
@@ -102,7 +105,7 @@ def win_spinners():
     percentage = 0.0
     strng = 'India won'
     strng2 = 'No result'
-    Type = "Spinner" 
+    Type = "Spinner"
     total = 0
 
     con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
@@ -114,8 +117,9 @@ def win_spinners():
     mt = cur.fetchall()
 
     for row in mt:
-        for match in row: 
-            cur.execute("""SELECT Wickets FROM bowling_statistics where ODI_NO = %s and Type = %s""", (str(match),Type))
+        for match in row:
+            cur.execute(
+                """SELECT Wickets FROM bowling_statistics where ODI_NO = %s and Type = %s""", (str(match), Type))
 
             wi = cur.fetchall()
 
@@ -125,9 +129,10 @@ def win_spinners():
                         total += int(wicket)
 
             if total >= 4:
-                cur.execute("""SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""",(str(match)))
+                cur.execute(
+                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
                 res = cur.fetchone()
-   
+
                 for a in res:
                     rest = a
                 if rest.find(strng) > -1:
@@ -142,8 +147,7 @@ def win_spinners():
     print 'Win Percentage : %.2f%% ' % (percentage)
 
 
-
-#seamers combined wickets
+# seamers combined wickets
 def win_seamer():
     win = 0.0
     nr = 0.0
@@ -151,7 +155,7 @@ def win_seamer():
     percentage = 0.0
     strng = 'India won'
     strng2 = 'No result'
-    Type = "Seamer" 
+    Type = "Seamer"
     total = 0
 
     con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
@@ -163,8 +167,9 @@ def win_seamer():
     mt = cur.fetchall()
 
     for row in mt:
-        for match in row: 
-            cur.execute("""SELECT Wickets FROM bowling_statistics where ODI_NO = %s and Type = %s""", (str(match),Type))
+        for match in row:
+            cur.execute(
+                """SELECT Wickets FROM bowling_statistics where ODI_NO = %s and Type = %s""", (str(match), Type))
 
             wi = cur.fetchall()
 
@@ -174,9 +179,10 @@ def win_seamer():
                         total += int(wicket)
 
             if total >= 4:
-                cur.execute("""SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""",(str(match)))
+                cur.execute(
+                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
                 res = cur.fetchone()
-   
+
                 for a in res:
                     rest = a
                 if rest.find(strng) > -1:
@@ -190,7 +196,9 @@ def win_seamer():
 
     print 'Win Percentage : %.2f%% ' % (percentage)
 
-#Two bowlers taking more than 3 wickets together
+# Two bowlers taking more than 3 wickets together
+
+
 def two_bowlers():
     char = '*'
     win = 0.0
@@ -200,14 +208,12 @@ def two_bowlers():
     strng = 'India won'
     strng2 = 'No result'
 
-
-  
     for wickt in newlist:
         wicket = wickt[4]
         if wicket != "-":
             player1 = wickt[13]
             match = wickt[10]
-            wicketnew = check_combined(player1,match,wicket)
+            wicketnew = check_combined(player1, match, wicket)
             if wicketnew == 1:
                 res = wickt[12]
                 if res.find(strng) > -1:
@@ -221,17 +227,18 @@ def two_bowlers():
 
     print 'Win Percentage : %.2f%% ' % (percentage)
 
-def check_combined(player,match,wicket):
+
+def check_combined(player, match, wicket):
     char = '*'
     total = 0
 
     for name in newlist:
-        if name[13]!= player:
+        if name[13] != player:
             if name[10] == match:
-                wicketnew = name[4]                    
-                if wicketnew != "-":    
-                    total = int(wicket)+int(wicketnew)                     
-                    if total > 3 :
+                wicketnew = name[4]
+                if wicketnew != "-":
+                    total = int(wicket)+int(wicketnew)
+                    if total > 3:
                         return 1
                         break
     return 0
