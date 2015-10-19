@@ -47,14 +47,26 @@ def batting():
         opponent = cursor.fetchall()
         return render_template('batting.html', player=player, ground=ground, opponent=opponent)
 
+    else:
+        batsmen = request.GET.get['batsmen']
+        print batsmen
+        # from Extract_data_Batting import win_count
+        # r = win_count(params)
+
+
+
+
 
 @app.route("/bowling", methods=['POST', 'GET'])
 def bowling():
     if request.method == 'GET':
+        var = '-'
         cursor = mysql.connect().cursor()
         cursor.execute("SELECT DISTINCT(PLayer) from bowling_statistics")
         player = cursor.fetchall()
-        return render_template('bowling.html', player=player)
+        cursor.execute("SELECT DISTINCT(Type) from bowling_statistics where Type!=%s", (var))
+        style = cursor.fetchall()
+        return render_template('bowling.html', player=player, style=style)
 
 
 if __name__ == "__main__":

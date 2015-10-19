@@ -24,7 +24,7 @@ def database():
 
 
 # Player scores more than 30 runs in a match
-def win_count(params):
+def win_count():
     runs = 0
     win = 0.0
     nr = 0.0
