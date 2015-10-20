@@ -36,11 +36,12 @@
           </ul>
         </li>
         <li><a href="https://github.com/alyakhtar/WinTheMatch"><i class="fa fa-github fa-lg"></i></a></li>
-      </ul>      
+      </ul>
     </div>
   </div>
 </nav>
 
+<div class="col-sm-3" style="background-color:lavenderblush">
 <form method="POST" class="main-form-bowl">
 
 <h3>Select Bowler :</h3>
@@ -54,6 +55,60 @@
         {% endfor %}
       {% endfor %}
     </select>
+
+<h3>Select Economy :</h3>
+
+<input type="radio" name="economy" value="4">
+<label> Less than 4.0 Economy</label><br>
+<input type="radio" name="economy" value="5">
+<label> Less than 5.0 Economy</label><br>
+<input type="radio" name="economy" value="6">
+<label> Less than 6.0 Economy</label>
+
+<br><br>
+<center>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+</center>
+</form>
+</div>
+
+<div class="col-sm-3" style="background-color:lavenderblush">
+<form method="POST" class="main-form-bowl">
+
+<h3>Select Bowler :</h3>
+    <select name="bowler">
+    <option>Select</option>
+      {% for play in player %}
+        {% for p in play %}
+        <option>
+          {{ p }}
+        </option>
+        {% endfor %}
+      {% endfor %}
+    </select>
+
+
+<br>
+
+<h3>Number of runs conceded :</h3>
+
+<input type="radio" name="concede" value="40">
+<label> Less than 40 </label><br>
+<input type="radio" name="concede" value="50">
+<label> Less than 50 Economy</label><br>
+<input type="radio" name="concede" value="60">
+<label> Less than 60 Economy</label>
+
+<br><br>
+<center>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+</center>
+
+</form>
+</div>
+
+<div class="col-sm-3" style="background-color:lavender">
+<form method="POST" class="main-form-bowl">
 
 <h3>Select Set of Bowlers :</h3>
     <select name="style">
@@ -69,37 +124,39 @@
 
 <h3>Select Number of Wickets :</h3>
 
-<input type="radio" name="wickets">
+<input type="radio" name="wickets" value="3">
 <label>3 Wickets</label>
-<input type="radio" name="wickets">
+<input type="radio" name="wickets" value="4">
 <label>4 Wickets</label>
-<input type="radio" name="wickets">
+<input type="radio" name="wickets" value="5">
 <label>5 Wickets</label>
 
-<h3>Select Economy :</h3>
-
-<input type="radio" name="economy" value="eco1">
-<label> Less than 4.0 Economy</label>
-<input type="radio" name="economy" value="eco2">
-<label> Less than 5.0 Economy</label>
-<input type="radio" name="economy" value="eco3">
-<label> Less than 6.0 Economy</label>
-
-<br>
-
-<h3>Number of runs conceded :</h3>
-
-<input type="radio" name="economy" value="eco1">
-<label> Less than 40 </label>
-<input type="radio" name="economy" value="eco2">
-<label> Less than 50 Economy</label>
-<input type="radio" name="economy" value="eco3">
-<label> Less than 60 Economy</label>
-
+<br><br>
 <center>
-  <button type="submit" class="btn btn-primary btn-block" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form3" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+</center>
+
+</form>
+</div>
+
+<div class="col-sm-3">
+<form method="POST" class="main-form-bowl">
+
+<h3>Two bowlers take :</h3>
+
+<input type="radio" name="wickets" value="3">
+<label>3 Wickets</label>
+<input type="radio" name="wickets" value="4">
+<label>4 Wickets</label>
+<input type="radio" name="wickets" value="5">
+<label>5 Wickets</label>
+
+<br><br>
+<center>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form4" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
 </center>
 </form>
+</div>
 
 <footer>
   &copy Jamians

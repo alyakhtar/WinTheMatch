@@ -20,7 +20,7 @@ def database():
 
 
 # Percentage based on economy of bowler
-def win_economy(params):
+def win_economy(param1, param2):
     economy = 0.0
     win = 0.0
     nr = 0.0
@@ -30,14 +30,14 @@ def win_economy(params):
     strng2 = 'No result'
 
     for name in newlist:
-        if name[13] == params: # player name
+        if name[13] == param1:  # player name
             # char = '-'
             economy = name[6]
             # if economy.find(char) > -1:
             #     economy = economy.replace("-", "")
 
             if economy != '-':
-                if int(economy) <= param: # economy
+                if int(economy) <= float(param2):  # economy
                     res = name[12]
                     if res.find(strng) > -1:
                         win += 1
@@ -57,7 +57,7 @@ def win_economy(params):
 
 
 # Percentage based on runs conceded by the bowler
-def win_runs():
+def win_runs(param1, param2):
     runs = 0
     win = 0.0
     nr = 0.0
@@ -67,10 +67,10 @@ def win_runs():
     strng2 = 'No result'
 
     for name in newlist:
-        if name[13] == 'Mohammed Shami':
+        if name[13] == param1:
             runs = name[3]
             if runs != '-':
-                if int(runs) <= 40:  #take as param
+                if int(runs) <= int(param2):  #take as param
                     res = name[12]
                     if res.find(strng) > -1:
                         win += 1
@@ -86,6 +86,8 @@ def win_runs():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
+    return str(int(win)), str(int(lost)), str(int(nr)), percentage
+
 
 # searching in a list
 # def search(list, ground):
@@ -96,7 +98,7 @@ def win_runs():
 
 
 # Spinners combined wickets
-def win_spinners():
+def win_spinners(param):
     win = 0.0
     nr = 0.0
     lost = 0.0
@@ -126,9 +128,9 @@ def win_spinners():
                     if wicket != "-":
                         total += int(wicket)
 
-            if total >= 4: # take params
+            if total >= int(param):  # take params
                 cur.execute(
-                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
+                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", [match])
                 res = cur.fetchone()
 
                 for a in res:
@@ -143,10 +145,11 @@ def win_spinners():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
 # seamers combined wickets
-def win_seamer():
+def win_seamer(param):
     win = 0.0
     nr = 0.0
     lost = 0.0
@@ -176,9 +179,9 @@ def win_seamer():
                     if wicket != "-":
                         total += int(wicket)
 
-            if total >= 4: # take paramas
+            if total >= int(param):  # take paramas
                 cur.execute(
-                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
+                    """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", [match])
                 res = cur.fetchone()
 
                 for a in res:
@@ -193,11 +196,11 @@ def win_seamer():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
+
 
 # Two bowlers taking more than 3 wickets together
-
-
-def two_bowlers():
+def two_bowlers(param):
     char = '*'
     win = 0.0
     nr = 0.0
@@ -211,7 +214,7 @@ def two_bowlers():
         if wicket != "-":
             player1 = wickt[13]
             match = wickt[10]
-            wicketnew = check_combined(player1, match, wicket)
+            wicketnew = check_combined(player1, match, wicket, param)
             if wicketnew == 1:
                 res = wickt[12]
                 if res.find(strng) > -1:
@@ -224,9 +227,10 @@ def two_bowlers():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
-def check_combined(player, match, wicket):
+def check_combined(player, match, wicket, param):
     char = '*'
     total = 0
 
@@ -236,7 +240,7 @@ def check_combined(player, match, wicket):
                 wicketnew = name[4]
                 if wicketnew != "-":
                     total = int(wicket)+int(wicketnew)
-                    if total > 3: # total wicket
+                    if total > int(param):  # total wicket
                         return 1
                         break
     return 0

@@ -118,12 +118,30 @@ def bowling():
     else:
         import Extract_Data_Bowling
         Extract_Data_Bowling.database()
-        bowler = request.form.get('bowler')
-        style = request.form.get('style')
-        eco = request.form.get('economy')
-        if bowler != "Select" and eco:
-            r = Extract_Data_Bowling.win_economy(bowler)
-        return render_template('result_bowling.html', bowler=bowler, r=r)
+        if request.form.get('btn') == 'form1':
+            bowler = request.form.get('bowler')
+            eco = request.form.get('economy')
+            if bowler != "Select" and eco:
+                r = Extract_Data_Bowling.win_economy(bowler, eco)
+                return render_template('result_bowling.html', bowler=bowler, r=r)
+        elif request.form.get('btn') == 'form2':
+            bowler = request.form.get('bowler')
+            run = request.form.get('concede')
+            if bowler != "Select" and run:
+                r = Extract_Data_Bowling.win_runs(bowler, run)
+                return render_template('result_bowling.html', bowler=bowler, r=r)
+        elif request.form.get('btn') == 'form3':
+            style = request.form.get('style')
+            wicket = request.form.get('wickets')
+            if style != "Select" and style == "Spinner" and wicket:
+                r = Extract_Data_Bowling.win_spinners(wicket)
+            elif style != "Select" and style == "Seamer" and wicket:
+                r = Extract_Data_Bowling.win_seamer(wicket)
+            return render_template('result_bowling.html', style=style, r=r)
+        else:
+            wicket = request.form.get('wickets')
+            r = Extract_Data_Bowling.win_spinners(wicket)
+            return render_template('result_bowling.html', r=r)
 
 
 if __name__ == "__main__":
