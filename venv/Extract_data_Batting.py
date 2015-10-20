@@ -11,7 +11,7 @@ filterwarnings('ignore', category=mdb.Warning)
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     sql = "SELECT * from batting_statistics"
     cur = con.cursor()
 
@@ -41,7 +41,7 @@ def win_count(param1, param2):
                 runs = runs.replace("*", "")
 
             if runs != 'DNB' and runs != 'TDNB':
-                if int(runs) >= param2:  # runs scored
+                if int(runs) >= int(param2) :  # runs scored
                     res = name[14]
                     if res.find(strng) > -1:
                         win += 1
@@ -286,7 +286,7 @@ def century():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 
