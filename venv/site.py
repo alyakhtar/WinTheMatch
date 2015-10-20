@@ -52,10 +52,10 @@ def batting():
         return render_template('batting.html', player=player, ground=ground, opponent=opponent)
 
     else:
-        batsmen = request.GET.get['batsmen']
+        from Extract_data_Batting import win_count
+        batsmen = request.form['batsmen']
         print batsmen
-        # from Extract_data_Batting import win_count
-        # r = win_count(params)
+        r = win_count(params)
 
 
 
