@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Win Prediction</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/news.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<!-- *********************************************************************************************** -->
+<body>
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Match Predictor</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/about">About</a></li>
+        <li><a href="http://www.espncricinfo.com/ci/content/story/news.html">News</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prediction<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/batting">Batting</a></li>
+            <li><a href="/bowling">Bowling</a></li>
+          </ul>
+        </li>
+        <li><a href="https://github.com/alyakhtar/WinTheMatch"><i class="fa fa-github fa-lg"></i></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#"><b>Logout</b></a>      
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>      
+
+<div class="container-fluid main-container">
+    <div class="col-md-2 sidebar">
+    <div class="row">
+    <div class="absolute-wrapper"> </div>
+    <div class="side-menu">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="side-menu-container">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#dashboard" onClick="$('#dashboard').show();$('#scripts').hide();$('#feedback').hide();$('#home').hide()"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                    <li ><a href="#feedback" onClick="$('#feedback').show(); $('#dashboard').hide();$('#home').hide();$('#scripts').hide();"><span class="glyphicon glyphicon-comment"></span> Feedback</a></li>
+                    <li><a href="#home" onClick="$('#dashboard').hide(); $('#home').show();$('#feedback').hide();$('#scripts').hide();"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a href="#scripts" onClick="$('#dashboard').hide(); $('#feedback').hide();$('#scripts').show();$('#home').hide();"><span class="glyphicon glyphicon-file"></span> Scripts</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>          
+</div>
+
+<div class="col-md-10 content" id="dashboard">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Dashboard
+        </div>
+        <div class="panel-body">
+            This is the Administration Page. All the details and the contents of the website can be managed through this page.<br>
+            Any Notification for other admins should be posted here.
+        </div>
+    </div>
+</div>
+<div class="col-md-10 content" id="feedback" style="display:none">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Feedback
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10 col-md-11">
+                        <div>
+                            <p >abc</p>
+                            <div >
+                                <p>E-mail: pqr</p> 
+                                <p>Feedback: xyz</p>
+                            </div>
+                        </div>
+                        <div class="action">                               
+                            <a type="button" class="btn btn-danger btn-xs" title="Delete" href="database/admindb.php?feedback_id='.$row[0].'">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>                   
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-10 content" id="home" style="display:none">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Home Page Settings
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10 col-md-11">
+                        <form action="" method="post" class="form-horizontal" id="carousel1" role="form" enctype="multipart/form-data">
+                            <p style="text-align:left;float:left;padding-top:5px;margin-right:200px"> Background Image </p>
+                            <input type="file" name="image"  id="fileToUpload" style="text-align:left;float:left;padding-top:5px;"> 
+                            <input type="submit" class="btn btn-danger" name="upload1" value="Change" style="text-align:right;float:right;">
+                        </form>
+                    </div><br><br>
+                    <div class="col-xs-10 col-md-11" style="margin-top:20px;">
+                        <form action="" method="post" class="form-horizontal" id="carousel1" role="form" enctype="multipart/form-data">
+                            <p style="text-align:left;float:left;padding-top:5px;margin-right:230px"> Batting Image </p>
+                            <input type="file" name="image" id="fileToUpload" style="text-align:left;float:left;padding-top:5px;"> 
+                            <input type="submit" class="btn btn-warning" name="upload1" value="Change" style="text-align:right;float:right;">
+                        </form>
+                    </div><br><br>
+                    <div class="col-xs-10 col-md-11" style="margin-top:20px;">
+                        <form action="" method="post" class="form-horizontal" id="carousel1" role="form" enctype="multipart/form-data">
+                            <p style="text-align:left;float:left;padding-top:5px;margin-right:225px"> Bowling Image </p>
+                            <input type="file" name="image"  id="fileToUpload" style="text-align:left;float:left;padding-top:5px;"> 
+                            <input type="submit" class="btn btn-info" name="upload1" value="Change" style="text-align:right;float:right;">
+                        </form>
+                    </div>
+                </div>
+            </li>                   
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-10 content" id="scripts" style="display:none">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Scripts
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10 col-md-11" >
+                        <p style="text-align:left;float:left;padding-top:5px;margin-right:300px"> Batting Update</p>
+                        <a href="" class="btn btn-danger" style="text-align:right;float:right;">Run</a> 
+                    </div><br><br>
+                    <div class="col-xs-10 col-md-11" style="margin-top:20px;">
+                        <p style="text-align:left;float:left;padding-top:5px;margin-right:300px"> Bowling Update</p>
+                        <a href="" class="btn btn-warning" style="text-align:right;float:right;">Run</a> 
+                    </div><br><br>
+                    <div class="col-xs-10 col-md-11" style="margin-top:20px;">
+                        <p style="text-align:left;float:left;padding-top:5px;margin-right:300px"> News Update</p>
+                        <a href="" class="btn btn-info" style="text-align:right;float:right;">Run</a> 
+                    </div>
+                </div>
+            </li>                   
+        </ul>
+    </div>
+</div>
+
+<footer style = " color: black">
+    &COPY Jamians
+</footer>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
