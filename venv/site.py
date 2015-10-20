@@ -59,9 +59,8 @@ def news():
 def about():
     return render_template('about.html')
 
+
 # 6 cases
-
-
 @app.route("/batting", methods=['POST', 'GET'])
 def batting():
     if request.method == 'GET':

@@ -87,7 +87,7 @@ def win_location(param1, param2, param3):
             if runs != 'DNB' and runs != 'TDNB':
                 if int(runs) >= int(param2):
                     flag = search(grounds, ground[10])
-                    if flag >= 0: # home
+                    if flag >= 0:  # home
                         res = ground[14]
                         if res.find(strng) > -1:
                             win_home += 1
@@ -95,8 +95,7 @@ def win_location(param1, param2, param3):
                             nr_home += 1
                         else:
                             lost_home += 1
-                        percentage_home = (win_home*100/(win_home+lost_home))
-                    else: #home
+                    else:  #away
                         res = ground[14]
                         if res.find(strng) > -1:
                             win_away += 1
@@ -104,8 +103,10 @@ def win_location(param1, param2, param3):
                             nr_away += 1
                         else:
                             lost_away += 1
-                        percentage_away = (win_away*100/(win_away+lost_away))
 
+
+    percentage_home = (win_home*100/(win_home+lost_home))
+    percentage_away = (win_away*100/(win_away+lost_away))
     print 'Matches Won at home : ' + str(int(win_home))
     print 'Matches Won away : ' + str(int(win_away))
     print 'Matches Lost at home : ' + str(int(lost_home))
