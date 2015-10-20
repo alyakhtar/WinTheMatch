@@ -26,7 +26,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/about">About</a></li>
+        <li><a href="/about">About</a></li>
         <li><a href="/news">News</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prediction<span class="caret"></span></a>
@@ -71,17 +71,16 @@
           </li>
         </ul>
         {% endif %}
+      </ul>
     </div>
   </div>
 </nav>
 
-<div class="col-sm-6">
-
+<div class="col-sm-6" style="background-color:lavenderblush">
 <form method="POST" class="main-form">
-
 <h3>Select Batsmen :</h3>
-  <select>
-      <option>Select</option>
+  <select name="Item_1">
+      <option value="batsmen">Select</option>
       {% for plyr in player %}
         {% for p in plyr %}
         <option value="batsmen" name="batsmen">
@@ -99,8 +98,22 @@
 <input type="radio">
 <label>Away</label>
 
+<!-- <form name="Item_1" action="results.html" method='POST'>
+    <select name="Item_1">
+        <option value="batsmen">Select</option>
+      {% for groun in ground %}
+        {% for g in groun %}
+        <option value="batsmen">
+          {{ g }}
+        </option>
+        {% endfor %}
+      {% endfor %}
+    </select>
+</form> -->
+
 <h3>Select Opponent :</h3>
 
+<form name="Item_1" action="results.html" method='POST'>
     <select name="Item_1">
     <option value="batsmen">Select</option>
       {% for opp in opponent %}
@@ -111,37 +124,47 @@
         {% endfor %}
       {% endfor %}
     </select>
+</form>
 
 <h3>Runs Scored :</h3>
 
 <div>
-  <input type="radio">
-  <label> > 30 Runs</label>
-  <input type="radio">
-  <label> > 50 Runs</label>
+<input type="radio">
+<label> > 30 Runs</label>
+<input type="radio">
+<label> > 50 Runs</label>
 </div>
-
 <br>
 
-<button type="submit" class="btn btn-primary btn-block" style="width: 300px">Calculate win percentage</button>
+<center>
+  <button type="submit" class="btn btn-primary btn-block" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+</center>
 </form>
 </div>
 
-<div class="col-sm-6">
+<!-- <div class="col-sm-2">
+  <h1 style="margin-top:200px;color:black">OR</h1>
+</div> -->
+
+
+<div class="col-sm-6" style="background-color:lavender">
+<div class="">
 <form method="POST" class="main-form2">
 
 <input type="radio">
-<label><h4>Two players score half century</h4></label>
+<label><h4 style="padding-top:50px;">Two players score half century</h4></label>
 <br>
 <input type="radio">
-<label><h4>Two players score more than 80 runs</h4></label>
+<label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label>
 
-<button type="submit" class="btn btn-primary btn-block" style="width: 300px">Calculate win percentage</button>
-
+<center>
+  <button type="submit" href="/result" method="POST" class="btn btn-primary btn-block" style="width: 300px;margin-top:170px;margin-bottom:30px">Calculate win percentage</button>
+</center>
 </form>
 </div>
+</div>
 
-<footer>
+<footer class="ftr">
   &copy Jamians
 </footer>
 </body>

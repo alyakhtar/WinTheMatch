@@ -58,7 +58,7 @@ h1,p{
 
 .bat{
     height:400px;
-    filter: blur(2px) ;
+    filter: blur(3px) ;
     padding-left: 130px;
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -69,7 +69,7 @@ h1,p{
 .bowl{
     height:400px;
     width: 420px;
-    filter: blur(2px) ;
+    filter: blur(3px) ;
     padding-left: 130px;
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -80,6 +80,16 @@ h1,p{
 footer{
     margin-bottom: -30px;
     color: lavender;
+}
+
+.ftr{
+    position:fixed;
+    height:30px;
+    color:black;
+    bottom:10px;
+    left:50px;
+    right:0px;
+    margin-bottom:10px;
 }
 
 
