@@ -1,5 +1,3 @@
-from bs4 import BeautifulSoup
-import sys
 from math import ceil
 import MySQLdb as mdb
 
@@ -9,7 +7,7 @@ import MySQLdb as mdb
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = "SELECT * from bowling_statistics"
     cur = con.cursor()
 
@@ -20,10 +18,9 @@ def database():
     for row in mt:
         newlist.append(row)
 
+
 # Percentage based on economy of bowler
-
-
-def win_economy():
+def win_economy(params):
     economy = 0.0
     win = 0.0
     nr = 0.0
@@ -33,14 +30,14 @@ def win_economy():
     strng2 = 'No result'
 
     for name in newlist:
-        if name[13] == 'R Ashwin':
+        if name[13] == params: # player name
             # char = '-'
             economy = name[6]
             # if economy.find(char) > -1:
             #     economy = economy.replace("-", "")
 
             if economy != '-':
-                if int(economy) <= 4.0:
+                if int(economy) <= param: # economy
                     res = name[12]
                     if res.find(strng) > -1:
                         win += 1
@@ -55,6 +52,8 @@ def win_economy():
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (ceil(percentage))
+
+    return str(int(win)), str(int(lost)), str(int(nr)), ceil(percentage)
 
 
 # Percentage based on runs conceded by the bowler
@@ -71,7 +70,7 @@ def win_runs():
         if name[13] == 'Mohammed Shami':
             runs = name[3]
             if runs != '-':
-                if int(runs) <= 40:
+                if int(runs) <= 40:  #take as param
                     res = name[12]
                     if res.find(strng) > -1:
                         win += 1
@@ -87,14 +86,13 @@ def win_runs():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
+
 # searching in a list
-
-
-def search(list, ground):
-    for (i, v) in enumerate(list):
-        if v == ground:
-            return i
-    return -1
+# def search(list, ground):
+#     for (i, v) in enumerate(list):
+#         if v == ground:
+#             return i
+#     return -1
 
 
 # Spinners combined wickets
@@ -108,7 +106,7 @@ def win_spinners():
     Type = "Spinner"
     total = 0
 
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM bowling_statistics'
     cur = con.cursor()
 
@@ -128,7 +126,7 @@ def win_spinners():
                     if wicket != "-":
                         total += int(wicket)
 
-            if total >= 4:
+            if total >= 4: # take params
                 cur.execute(
                     """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
                 res = cur.fetchone()
@@ -158,7 +156,7 @@ def win_seamer():
     Type = "Seamer"
     total = 0
 
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM bowling_statistics'
     cur = con.cursor()
 
@@ -178,7 +176,7 @@ def win_seamer():
                     if wicket != "-":
                         total += int(wicket)
 
-            if total >= 4:
+            if total >= 4: # take paramas
                 cur.execute(
                     """SELECT DISTINCT Result FROM bowling_statistics WHERE ODI_NO = %s""", (str(match)))
                 res = cur.fetchone()
@@ -238,7 +236,7 @@ def check_combined(player, match, wicket):
                 wicketnew = name[4]
                 if wicketnew != "-":
                     total = int(wicket)+int(wicketnew)
-                    if total > 3:
+                    if total > 3: # total wicket
                         return 1
                         break
     return 0

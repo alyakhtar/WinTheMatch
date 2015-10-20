@@ -58,7 +58,7 @@ def news():
 def about():
     return render_template('about.html')
 
-
+# 6 cases
 @app.route("/batting", methods=['POST', 'GET'])
 def batting():
     if request.method == 'GET':
@@ -74,24 +74,34 @@ def batting():
     else:
         import Extract_data_Batting
         Extract_data_Batting.database()
-        batsmen = request.form.get('batsmen')
-        run = request.form.get('runs')
-        venue = request.form.get('place')
-        opponent = request.form.get('opponent')
-        #form 2
-        player = request.form.get('players')
-        if player == "option1":
-            r = Extract_data_Batting.double_half_century()
-        elif player == "option2":
-            r = Extract_data_Batting.combined_score()
-        if batsmen and run and venue and opponent:
-            if run == "run2":
-                r = Extract_data_Batting.win_count(batsmen)
-            elif run == "run1":
-                r = Extract_data_Batting.win_count(batsmen)
-            elif run == "run2":
-                r = Extract_data_Batting.win_count(batsmen)
-        return render_template('result_batting.html', batsmen=batsmen, r=r)
+        # FORM 1
+        if request.form.get('btn') == 'form1':
+            batsmen = request.form.get('batsmen')
+            venue = request.form.get('place')
+            opponent = request.form.get('opponent')
+            run = request.form.get('runs')
+            if batsmen != "Select" and run and venue and opponent != "Select":
+                r = Extract_data_Batting.win_combined(batsmen, opponent, run, venue)
+                return render_template('result_batting.html', batsmen=batsmen, r=r)
+            elif batsmen != "Select" and run and venue:
+                r = Extract_data_Batting.win_location(batsmen, run, venue)
+                return render_template('result_batting.html', batsmen=batsmen, r=r)
+            elif batsmen != "Select" and run and opponent != "Select":
+                r = Extract_data_Batting.win_against(batsmen, run, opponent)
+                return render_template('result_batting.html', batsmen=batsmen, r=r)
+            elif batsmen != "Select" and run:
+                r = Extract_data_Batting.win_count(batsmen, run)
+                return render_template('result_batting.html', batsmen=batsmen, r=r)
+        # FORM 2
+        else:
+            player = request.form.get('players')
+            if player == "option1":
+                r = Extract_data_Batting.double_half_century()
+            elif player == "option2":
+                r = Extract_data_Batting.century()
+            else:
+                r = Extract_data_Batting.combined_score()
+            return render_template('result_batting.html', r=r)
 
 
 @app.route("/bowling", methods=['POST', 'GET'])
@@ -107,13 +117,14 @@ def bowling():
         return render_template('bowling.html', player=player, style=style)
 
     else:
-        # from Extract_data_Batting import win_count
+        import Extract_Data_Bowling
+        Extract_Data_Bowling.database()
         bowler = request.form.get('bowler')
-        print bowler
-        # return batsmen
-        # r = win_count(batsmen)
-        # print batsmen
-        return render_template('result_bowling.html', bowler=bowler)
+        style = request.form.get('style')
+        eco = request.form.get('economy')
+        if bowler != "Select" and eco:
+            r = Extract_Data_Bowling.win_economy(bowler)
+        return render_template('result_bowling.html', bowler=bowler, r=r)
 
 
 if __name__ == "__main__":

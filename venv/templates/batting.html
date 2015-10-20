@@ -112,13 +112,13 @@
 <h3>Runs Scored :</h3>
 
 <div>
-<input type="radio" name="runs" value="runs1"><label>More than 30 Runs</label>
-<input type="radio" name="runs" value="runs2"><label>More than 50 Runs</label>
+<input type="radio" name="runs" value="30"><label>More than 30 Runs</label>
+<input type="radio" name="runs" value="50"><label>More than 50 Runs</label>
 </div>
 <br>
 
 <center>
-  <button type="submit" class="btn btn-primary btn-block" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
 </center>
 </form>
 </div>
@@ -132,10 +132,13 @@
 <label><h4 style="padding-top:50px;">Two players score half century</h4></label>
 <br>
 <input type="radio" name="players" value="option2">
+<label><h4 style="padding-top:50px;">A player scores a century</h4></label>
+<br>
+<input type="radio" name="players" value="option3">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label>
 
 <center>
-  <button type="submit" href="/result" method="POST" class="btn btn-primary btn-block" style="width: 300px;margin-top:170px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:170px;margin-bottom:30px">Calculate win percentage</button>
 </center>
 </form>
 </div>

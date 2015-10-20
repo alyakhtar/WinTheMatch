@@ -24,7 +24,7 @@ def database():
 
 
 # Player scores more than 30 runs in a match
-def win_count(params):
+def win_count(param1, param2):
     runs = 0
     win = 0.0
     nr = 0.0
@@ -34,15 +34,14 @@ def win_count(params):
     strng2 = 'No result'
 
     for name in newlist:
-        # if name[15] == 'V Kohli':
-        if name[15] == params:
+        if name[15] == param1:  # player name
             char = '*'
             runs = name[1]
             if runs.find(char) > -1:
                 runs = runs.replace("*", "")
 
             if runs != 'DNB' and runs != 'TDNB':
-                if int(runs) >= 30:
+                if int(runs) >= param2:  # runs scored
                     res = name[14]
                     if res.find(strng) > -1:
                         win += 1
@@ -62,7 +61,7 @@ def win_count(params):
 
 
 # Match is being played in home or away condition
-def win_location():
+def win_location(param1, param2, param3):
     win_home = 0.0
     nr_home = 0.0
     lost_home = 0.0
@@ -82,16 +81,16 @@ def win_location():
                'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
 
     for ground in newlist:
-        if ground[15] == 'V Kohli':
+        if ground[15] == param1:
             char = '*'
             runs = ground[1]
             if runs.find(char) > -1:
                 runs = runs.replace("*", "")
 
             if runs != 'DNB' and runs != 'TDNB':
-                if int(runs) >= 30 and int(runs) < 100:
+                if int(runs) >= param2:
                     flag = search(grounds, ground[10])
-                    if flag >= 0:
+                    if flag >= 0: # home
                         res = ground[14]
                         if res.find(strng) > -1:
                             win_home += 1
@@ -99,7 +98,8 @@ def win_location():
                             nr_home += 1
                         else:
                             lost_home += 1
-                    else:
+                        percentage_home = (win_home*100/(win_home+lost_home))
+                    else: #home
                         res = ground[14]
                         if res.find(strng) > -1:
                             win_away += 1
@@ -107,9 +107,7 @@ def win_location():
                             nr_away += 1
                         else:
                             lost_away += 1
-
-    percentage_home = (win_home*100/(win_home+lost_home))
-    percentage_away = (win_away*100/(win_away+lost_away))
+                        percentage_away = (win_away*100/(win_away+lost_away))
 
     print 'Matches Won at home : ' + str(int(win_home))
     print 'Matches Won away : ' + str(int(win_away))
@@ -120,9 +118,14 @@ def win_location():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
+    if param3 == "home":
+        return percentage_home
+    else:
+        return percentage_away
 
-# Match being played against a specific team
-def win_against():
+
+# Match being played against a specific team and scoring specific runs
+def win_against(param1, param2, param3):
     runs = 0
     win = 0.0
     nr = 0.0
@@ -132,15 +135,15 @@ def win_against():
     strng2 = 'No result'
 
     for name in newlist:
-        if name[15] == 'V Kohli':
-            if name[13] == 'Australia':
+        if name[15] == param1:  # player name
+            if name[13] == param3:  # opponent
                 char = '*'
                 runs = name[1]
                 if runs.find(char) > -1:
                     runs = runs.replace("*", "")
 
                 if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= 50 and int(runs) < 100:
+                    if int(runs) >= param2:  # 30 or 50
                         res = name[14]
                         if res.find(strng) > -1:
                             win += 1
@@ -155,10 +158,11 @@ def win_against():
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
 # combination of runs scores, home or away condition and oppositipon
-def win_combined():
+def win_combined(param1, param2, param3, param4):
     win_home = 0.0
     nr_home = 0.0
     lost_home = 0.0
@@ -178,15 +182,15 @@ def win_combined():
                'Jalandhar', 'Amritsar', 'Kolkata', 'Gwalior', 'Jodhpur', 'Cuttack']
 
     for ground in newlist:
-        if ground[15] == 'V Kohli':
-            if ground[13] == 'Australia':
+        if ground[15] == param1:  # player name
+            if ground[13] == param2:  # opponent
                 char = '*'
                 runs = ground[1]
                 if runs.find(char) > -1:
                     runs = runs.replace("*", "")
 
                 if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= 50 and int(runs) < 100:
+                    if int(runs) >= param3:  # 30 or 50
                         flag = search(grounds, ground[10])
                         if flag >= 0:
                             res = ground[14]
@@ -196,6 +200,7 @@ def win_combined():
                                 nr_home += 1
                             else:
                                 lost_home += 1
+                            percentage_home = (win_home*100/(win_home+lost_home))
                         else:
                             res = ground[14]
                             if res.find(strng) > -1:
@@ -204,9 +209,7 @@ def win_combined():
                                 nr_away += 1
                             else:
                                 lost_away += 1
-
-    percentage_home = (win_home*100/(win_home+lost_home))
-    percentage_away = (win_away*100/(win_away+lost_away))
+                            percentage_away = (win_away*100/(win_away+lost_away))
 
     print 'Matches Won at home : ' + str(int(win_home))
     print 'Matches Won away : ' + str(int(win_away))
@@ -217,7 +220,13 @@ def win_combined():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
+    if param4 == "home":
+        return percentage_home
+    else:
+        return percentage_away
 
+
+# check code from here
 # Two players score half centuries each
 def double_half_century():
     char = '*'
@@ -311,6 +320,7 @@ def century():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
 def check_century(list, odi):
@@ -391,6 +401,7 @@ def check_combined(player, match, p1runs):
 
 
 # Total team score more than 250
+# working without exy
 def team_total():
     total = 0
     char = '*'
