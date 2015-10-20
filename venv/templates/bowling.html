@@ -79,9 +79,10 @@
 
 <form name="Item_1" action="results.html" method='POST'>
     <select name="Item_1">
+    <option value="bowler">Select</option>
       {% for play in player %}
         {% for p in play %}
-        <option value="batsmen">
+        <option value="bowler">
           {{ p }}
         </option>
         {% endfor %}
@@ -93,9 +94,10 @@
 
 <form name="Item_1" action="results.html" method='POST'>
     <select name="Item_1">
+        <option value="bowler">Select</option>
       {% for type in style %}
         {% for t in type %}
-        <option value="batsmen">
+        <option value="bowler">
           {{ t }}
         </option>
         {% endfor %}
@@ -105,21 +107,21 @@
 
 <h3>Select Number of Wickets :</h3>
 
-<input type="radio">
+<input type="radio" name="wickets">
 <label>3 Wickets</label>
-<input type="radio">
+<input type="radio" name="wickets">
 <label>4 Wickets</label>
-<input type="radio">
+<input type="radio" name="wickets">
 <label>5 Wickets</label>
 
 <h3>Select Economy :</h3>
 
-<input type="radio">
-<label> < 4.0 Economy</label>
-<input type="radio">
-<label> < 5.0 Economy</label>
-<input type="radio">
-<label> < 6.0 Economy</label>
+<input type="radio" name="economy">
+<label> Less than 4.0 Economy</label>
+<input type="radio" name="economy">
+<label> Less than 5.0 Economy</label>
+<input type="radio" name="economy">
+<label> Less than 6.0 Economy</label>
 
 <br><br>
 

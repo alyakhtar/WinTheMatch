@@ -92,24 +92,8 @@
 
 <h3>Select Ground :</h3>
 
-<input type="radio">
-<label>Home</label>
-
-<input type="radio">
-<label>Away</label>
-
-<!-- <form name="Item_1" action="results.html" method='POST'>
-    <select name="Item_1">
-        <option value="batsmen">Select</option>
-      {% for groun in ground %}
-        {% for g in groun %}
-        <option value="batsmen">
-          {{ g }}
-        </option>
-        {% endfor %}
-      {% endfor %}
-    </select>
-</form> -->
+<input type="radio" name="place" value="india"><label>Home</label>
+<input type="radio" name="place" value="abroad"><label>Away</label>
 
 <h3>Select Opponent :</h3>
 
@@ -129,10 +113,8 @@
 <h3>Runs Scored :</h3>
 
 <div>
-<input type="radio">
-<label> > 30 Runs</label>
-<input type="radio">
-<label> > 50 Runs</label>
+<input type="radio" name="runs" value="less"><label>More than 30 Runs</label>
+<input type="radio" name="runs" value="more"><label>More than 50 Runs</label>
 </div>
 <br>
 
@@ -151,10 +133,10 @@
 <div class="">
 <form method="POST" class="main-form2">
 
-<input type="radio">
+<input type="radio" name="players">
 <label><h4 style="padding-top:50px;">Two players score half century</h4></label>
 <br>
-<input type="radio">
+<input type="radio" name="players">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label>
 
 <center>
