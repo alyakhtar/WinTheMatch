@@ -9,7 +9,7 @@ app.config.from_object(__name__)
 
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'adityagupta'
+app.config['MYSQL_DATABASE_PASSWORD'] = '123456'
 app.config['MYSQL_DATABASE_DB'] = 'cricket'
 app.config['SECRET_KEY'] = 'development key'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'

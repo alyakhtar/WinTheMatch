@@ -8,7 +8,7 @@ filterwarnings('ignore', category=mdb.Warning)
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     sql = "SELECT * from batting_statistics"
     cur = con.cursor()
 
@@ -284,7 +284,7 @@ def century():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 
@@ -322,7 +322,7 @@ def century():
 
 
 def check_century(list, odi):
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     cur = con.cursor()
 
     char = '*'
@@ -410,7 +410,7 @@ def team_total():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
+    con = mdb.connect('localhost', 'root', '123456', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 
