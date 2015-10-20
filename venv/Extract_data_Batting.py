@@ -1,7 +1,4 @@
 import MySQLdb as mdb
-import sys
-import glob
-import os
 from warnings import filterwarnings
 
 filterwarnings('ignore', category=mdb.Warning)
@@ -11,7 +8,7 @@ filterwarnings('ignore', category=mdb.Warning)
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = "SELECT * from batting_statistics"
     cur = con.cursor()
 
@@ -41,7 +38,7 @@ def win_count(param1, param2):
                 runs = runs.replace("*", "")
 
             if runs != 'DNB' and runs != 'TDNB':
-                if int(runs) >= int(param2) :  # runs scored
+                if int(runs) >= int(param2):  # runs scored
                     res = name[14]
                     if res.find(strng) > -1:
                         win += 1
@@ -88,7 +85,7 @@ def win_location(param1, param2, param3):
                 runs = runs.replace("*", "")
 
             if runs != 'DNB' and runs != 'TDNB':
-                if int(runs) >= param2:
+                if int(runs) >= int(param2):
                     flag = search(grounds, ground[10])
                     if flag >= 0: # home
                         res = ground[14]
@@ -119,9 +116,9 @@ def win_location(param1, param2, param3):
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
     if param3 == "home":
-        return percentage_home
+        return str(int(win_home)), str(int(lost_home)), str(int(nr_home)), percentage_home
     else:
-        return percentage_away
+        return str(int(win_away)), str(int(lost_away)), str(int(lost_away)), percentage_away
 
 
 # Match being played against a specific team and scoring specific runs
@@ -143,7 +140,7 @@ def win_against(param1, param2, param3):
                     runs = runs.replace("*", "")
 
                 if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= param2:  # 30 or 50
+                    if int(runs) >= int(param2):  # 30 or 50
                         res = name[14]
                         if res.find(strng) > -1:
                             win += 1
@@ -158,7 +155,8 @@ def win_against(param1, param2, param3):
     print 'Matches Lost : ' + str(int(lost))
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f%% ' % (percentage)
-    return percentage
+
+    return str(int(win)), str(int(lost)), str(int(nr)), percentage
 
 
 # combination of runs scores, home or away condition and oppositipon
@@ -190,7 +188,7 @@ def win_combined(param1, param2, param3, param4):
                     runs = runs.replace("*", "")
 
                 if runs != 'DNB' and runs != 'TDNB':
-                    if int(runs) >= param3:  # 30 or 50
+                    if int(runs) >= int(param3):  # 30 or 50
                         flag = search(grounds, ground[10])
                         if flag >= 0:
                             res = ground[14]
@@ -221,9 +219,9 @@ def win_combined(param1, param2, param3, param4):
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
     if param4 == "home":
-        return percentage_home
+        return str(int(win_home)), str(int(lost_home)), str(int(nr_home)), percentage_home
     else:
-        return percentage_away
+        return str(int(win_away)), str(int(lost_away)), str(int(lost_away)), percentage_away
 
 
 # check code from here
@@ -286,7 +284,7 @@ def century():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 
@@ -297,7 +295,7 @@ def century():
     for row in mt:
         for match in row:
             cur.execute(
-                """SELECT Player FROM batting_statistics where ODI_NO = %s""", (str(match)))
+                """SELECT Player FROM batting_statistics where ODI_NO = %s""", (match))
 
             pl = cur.fetchall()
 
@@ -324,7 +322,7 @@ def century():
 
 
 def check_century(list, odi):
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     cur = con.cursor()
 
     char = '*'
@@ -412,7 +410,7 @@ def team_total():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 

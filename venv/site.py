@@ -59,6 +59,8 @@ def about():
     return render_template('about.html')
 
 # 6 cases
+
+
 @app.route("/batting", methods=['POST', 'GET'])
 def batting():
     if request.method == 'GET':
@@ -82,16 +84,13 @@ def batting():
             run = request.form.get('runs')
             if batsmen != "Select" and run and venue and opponent != "Select":
                 r = Extract_data_Batting.win_combined(batsmen, opponent, run, venue)
-                return render_template('result_batting.html', batsmen=batsmen, r=r)
             elif batsmen != "Select" and run and venue:
                 r = Extract_data_Batting.win_location(batsmen, run, venue)
-                return render_template('result_batting.html', batsmen=batsmen, r=r)
             elif batsmen != "Select" and run and opponent != "Select":
                 r = Extract_data_Batting.win_against(batsmen, run, opponent)
-                return render_template('result_batting.html', batsmen=batsmen, r=r)
             elif batsmen != "Select" and run:
                 r = Extract_data_Batting.win_count(batsmen, run)
-                return render_template('result_batting.html', batsmen=batsmen, r=r)
+            return render_template('result_batting.html', batsmen=batsmen, r=r)
         # FORM 2
         else:
             player = request.form.get('players')

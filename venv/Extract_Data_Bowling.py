@@ -7,7 +7,7 @@ import MySQLdb as mdb
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = "SELECT * from bowling_statistics"
     cur = con.cursor()
 
@@ -106,7 +106,7 @@ def win_spinners():
     Type = "Spinner"
     total = 0
 
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM bowling_statistics'
     cur = con.cursor()
 
@@ -156,7 +156,7 @@ def win_seamer():
     Type = "Seamer"
     total = 0
 
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM bowling_statistics'
     cur = con.cursor()
 
