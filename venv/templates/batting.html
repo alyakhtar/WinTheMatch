@@ -77,44 +77,44 @@
 </nav>
 
 <div class="col-sm-6" style="background-color:lavenderblush">
-<form method="POST" class="main-form">
+
+<form method="POST" class="main-form-bat">
+
 <h3>Select Batsmen :</h3>
-  <select name="Item_1">
-      <option value="batsmen">Select</option>
+  <select name="batsmen">
+      <option>Select</option>
       {% for plyr in player %}
         {% for p in plyr %}
-        <option value="batsmen" name="batsmen">
+        <option>
           {{ p }}
         </option>
         {% endfor %}
       {% endfor %}
-    </select>
+  </select>
 
 <h3>Select Ground :</h3>
 
-<input type="radio" name="place" value="india"><label>Home</label>
-<input type="radio" name="place" value="abroad"><label>Away</label>
+<input type="radio" name="place"><label>Home</label>
+<input type="radio" name="place"><label>Away</label>
 
 <h3>Select Opponent :</h3>
 
-<form name="Item_1" action="results.html" method='POST'>
-    <select name="Item_1">
-    <option value="batsmen">Select</option>
+    <select>
+    <option>Select</option>
       {% for opp in opponent %}
         {% for o in opp %}
-        <option value="batsmen">
+        <option>
           {{ o }}
         </option>
         {% endfor %}
       {% endfor %}
     </select>
-</form>
 
 <h3>Runs Scored :</h3>
 
 <div>
-<input type="radio" name="runs" value="less"><label>More than 30 Runs</label>
-<input type="radio" name="runs" value="more"><label>More than 50 Runs</label>
+<input type="radio" name="runs"><label>More than 30 Runs</label>
+<input type="radio" name="runs"><label>More than 50 Runs</label>
 </div>
 <br>
 
