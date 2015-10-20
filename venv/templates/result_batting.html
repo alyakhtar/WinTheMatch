@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Highcharts Example</title>
+		<title>Win Prediction</title>
 
         <link href="static/css/bootstrap.min.css" rel="stylesheet">
         <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -37,19 +37,35 @@
                             }
                         }
                     },
+                    {% if r.0 %}
                     series: [{
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Loss',       31.2],
+                            ['Loss',       100 - {{ r.3 }}],
                             {
                                 name: 'Win',
-                                y: 68.8,
+                                y: {{ r.3 }},
                                 sliced: true,
                                 selected: true
                             }
                         ]
                     }]
+                    {% else %}
+                    series: [{
+                        type: 'pie',
+                        name: 'Browser share',
+                        data: [
+                            ['Loss',       100 - {{ r }}],
+                            {
+                                name: 'Win',
+                                y: {{ r }},
+                                sliced: true,
+                                selected: true
+                            }
+                        ]
+                    }]
+                    {% endif %}
                 });
             });
 		</script>
@@ -84,8 +100,17 @@
     </div>
   </div>
 </nav>
-    {{ batsmen }}
-    {{ perc }}
+{% if r.0 %}
+<h3>Player : {{ batsmen }}</h3>
+<h3>Matches Won : {{ r.0 }}</h3>
+<h3>Matches Lost : {{ r.1 }}</h3>
+<h3>No result : {{ r.2 }}</h3>
+<h2>Win Percentage : {{ r.3 }}</h4>
+{% else %}
+<h2>Win Percentage : {{ r }}</h4>
+{% endif%}
+
+
 
 
 <script src="static/js/highcharts.js"></script>

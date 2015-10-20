@@ -94,12 +94,11 @@
 
 <h3>Select Ground :</h3>
 
-<input type="radio" name="place"><label>Home</label>
-<input type="radio" name="place"><label>Away</label>
+<input type="radio" name="place" value="home"><label>Home</label>
+<input type="radio" name="place" value="away"><label>Away</label>
 
 <h3>Select Opponent :</h3>
-
-    <select>
+    <select name="opponent">
     <option>Select</option>
       {% for opp in opponent %}
         {% for o in opp %}
@@ -113,8 +112,8 @@
 <h3>Runs Scored :</h3>
 
 <div>
-<input type="radio" name="runs"><label>More than 30 Runs</label>
-<input type="radio" name="runs"><label>More than 50 Runs</label>
+<input type="radio" name="runs" value="runs1"><label>More than 30 Runs</label>
+<input type="radio" name="runs" value="runs2"><label>More than 50 Runs</label>
 </div>
 <br>
 
@@ -124,19 +123,15 @@
 </form>
 </div>
 
-<!-- <div class="col-sm-2">
-  <h1 style="margin-top:200px;color:black">OR</h1>
-</div> -->
-
 
 <div class="col-sm-6" style="background-color:lavender">
 <div class="">
 <form method="POST" class="main-form2">
 
-<input type="radio" name="players">
+<input type="radio" name="players" value="option1">
 <label><h4 style="padding-top:50px;">Two players score half century</h4></label>
 <br>
-<input type="radio" name="players">
+<input type="radio" name="players" value="option2">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label>
 
 <center>

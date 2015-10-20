@@ -73,8 +73,24 @@ def batting():
 
     else:
         import Extract_data_Batting
+        Extract_data_Batting.database()
         batsmen = request.form.get('batsmen')
-        r = Extract_data_Batting.win_count(batsmen)
+        run = request.form.get('runs')
+        venue = request.form.get('place')
+        opponent = request.form.get('opponent')
+        #form 2
+        player = request.form.get('players')
+        if player == "option1":
+            r = Extract_data_Batting.double_half_century()
+        elif player == "option2":
+            r = Extract_data_Batting.combined_score()
+        if batsmen and run and venue and opponent:
+            if run == "run2":
+                r = Extract_data_Batting.win_count(batsmen)
+            elif run == "run1":
+                r = Extract_data_Batting.win_count(batsmen)
+            elif run == "run2":
+                r = Extract_data_Batting.win_count(batsmen)
         return render_template('result_batting.html', batsmen=batsmen, r=r)
 
 

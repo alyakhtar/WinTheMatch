@@ -11,7 +11,7 @@ filterwarnings('ignore', category=mdb.Warning)
 def database():
     global newlist
     newlist = []
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = "SELECT * from batting_statistics"
     cur = con.cursor()
 
@@ -35,7 +35,7 @@ def win_count(params):
 
     for name in newlist:
         # if name[15] == 'V Kohli':
-        if name[15] == 'params':
+        if name[15] == params:
             char = '*'
             runs = name[1]
             if runs.find(char) > -1:
@@ -58,9 +58,10 @@ def win_count(params):
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f ' % (percentage)
 
+    return str(int(win)), str(int(lost)), str(int(nr)), percentage
+
+
 # Match is being played in home or away condition
-
-
 def win_location():
     win_home = 0.0
     nr_home = 0.0
@@ -119,9 +120,8 @@ def win_location():
     print 'Home Win Percentage : %.2f%%' % (percentage_home)
     print 'Away Win Percentage : %.2f%%' % (percentage_away)
 
+
 # Match being played against a specific team
-
-
 def win_against():
     runs = 0
     win = 0.0
@@ -156,9 +156,8 @@ def win_against():
     print 'No Result : ' + str(int(nr))
     print 'Win Percentage : %.2f%% ' % (percentage)
 
+
 # combination of runs scores, home or away condition and oppositipon
-
-
 def win_combined():
     win_home = 0.0
     nr_home = 0.0
@@ -250,6 +249,7 @@ def double_half_century():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
 def check_50(player, match):
@@ -277,7 +277,7 @@ def century():
     strng = 'India won'
     strng2 = 'No result'
 
-    con = mdb.connect('localhost', 'root', 'samuraii', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     sql = 'SELECT DISTINCT ODI_NO FROM batting_statistics'
     cur = con.cursor()
 
@@ -369,6 +369,7 @@ def combined_score():
     percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
+    return percentage
 
 
 def check_combined(player, match, p1runs):
