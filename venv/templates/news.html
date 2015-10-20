@@ -81,33 +81,43 @@
         {% for i in info %}
           {% if i.0 == 1 %}
           <div class="item active">
-          <img src="{{ i.3 }}" style="width:760px;height:400px">
-           <div class="carousel-caption">
-            <h4><a href="#">{{ i.1 }}</a></h4>
-            <p>{{ i.2 }}</p>
-          </div>
+            <img src="http://p.imgci.com{{ i.3 }}" style="width:760px;height:400px">
+            <div class="carousel-caption">
+              <h4><a href="#">{{ i.1 }}</a></h4>
+              <p>{{ i.2 }}</p>
+            </div>
           </div>
           {% else %}
           <div class="item">
-           <div class="carousel-caption">
-            <h4><a href="#">{{ i.1 }}</a></h4>
-            <p>{{ i.2 }}</p>
+            <img src="http://p.imgci.com{{ i.3 }}" style="width:760px;height:400px">
+            <div class="carousel-caption">
+              <h4><a href="#">{{ i.1 }}</a></h4>
+              <p>{{ i.2 }}</p>
+            </div>
           </div>
-        </div>
           {% endif %}
         {% endfor %}
       </div>
-      </div>
-      </div>
-
-<!--     <ul class="list-group col-sm-4">
-      <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active"><h4>Enhanced Snickometer ready for Test use</h4></li>
-      <li data-target="#myCarousel" data-slide-to="1" class="list-group-item"><h4>Enhanced Snickometer ready for Test use</h4></li>
-      <li data-target="#myCarousel" data-slide-to="2" class="list-group-item"><h4>Enhanced Snickometer ready for Test use</h4></li>
-      <li data-target="#myCarousel" data-slide-to="3" class="list-group-item"><h4>Enhanced Snickometer ready for Test use</h4></li>
-      <li data-target="#myCarousel" data-slide-to="4" class="list-group-item"><h4>Enhanced Snickometer ready for Test use</h4></li>
-    </ul> -->
-
+     
+    <ul class="list-group col-sm-4">
+    {% for i in info %}
+      {% if i.0 == 1 %}
+      <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active"><h4>{{i.1}}</h4></li>
+      {% endif %}
+      {% if i.0 == 2 %}
+      <li data-target="#myCarousel" data-slide-to="1" class="list-group-item"><h4>{{i.1}}</h4></li>
+      {% endif %}
+      {% if i.0 == 3 %}
+      <li data-target="#myCarousel" data-slide-to="2" class="list-group-item"><h4>{{i.1}}</h4></li>
+      {% endif %}
+      {% if i.0 == 4 %}
+      <li data-target="#myCarousel" data-slide-to="3" class="list-group-item"><h4>{{i.1}}</h4></li>
+      {% endif %}
+      {% if i.0 == 5 %}
+      <li data-target="#myCarousel" data-slide-to="4" class="list-group-item"><h4>{{i.1}}</h4></li>
+    </ul>
+      {% endif %}
+    {% endfor %}
 
       <div class="carousel-controls">
           <a class="left carousel-control" href="#myCarousel" data-slide="prev">
