@@ -295,7 +295,7 @@ def century():
     for row in mt:
         for match in row:
             cur.execute(
-                """SELECT Player FROM batting_statistics where ODI_NO = %s""", (match))
+                """SELECT Player FROM batting_statistics where ODI_NO = %s""", [match])
 
             pl = cur.fetchall()
 
@@ -303,7 +303,7 @@ def century():
 
             if flag == 1:
                 cur.execute(
-                    """SELECT DISTINCT Result FROM batting_statistics WHERE ODI_NO = %s""", (str(match)))
+                    """SELECT DISTINCT Result FROM batting_statistics WHERE ODI_NO = %s""", [match])
                 res = cur.fetchone()
 
                 for a in res:
