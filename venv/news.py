@@ -1,4 +1,4 @@
-°import requests
+import requests
 import sys
 from bs4 import BeautifulSoup
 import MySQLdb as mdb
@@ -41,7 +41,7 @@ def news():
     for i in range(len(x)):
         mt.append([x[i], y[i], z[i]])
 
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     with con:
         cur = con.cursor()
         cur.execute(
@@ -54,7 +54,7 @@ def news():
 
 
 if __name__ == '__main__':
-    con = mdb.connect('localhost', 'root', '123456', 'cricket')
+    con = mdb.connect('localhost', 'root', 'adityagupta', 'cricket')
     cur = con.cursor()
     cur.execute("DROP TABLE IF EXISTS news")
     news()

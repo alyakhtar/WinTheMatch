@@ -48,7 +48,11 @@ def index():
 
 @app.route("/news")
 def news():
-    return render_template('news.html')
+    cursor = mysql.connect().cursor()
+    cursor.execute("SELECT * from news LIMIT 5")
+    info = cursor.fetchall()
+    print info
+    return render_template('news.html', info=info)
 
 
 @app.route("/about")
