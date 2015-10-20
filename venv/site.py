@@ -7,7 +7,7 @@ mysql = MySQL()
 app = Flask(__name__)
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'adityagupta'
+app.config['MYSQL_DATABASE_PASSWORD'] = '123456'
 app.config['MYSQL_DATABASE_DB'] = 'cricket'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
@@ -20,7 +20,7 @@ def login():
         username = request.form['UserName']
         password = request.form['Password']
         if username == "admin" and password == "admin":
-            return render_template('login_success.html')
+            return render_template('admin.html')
         else:
             return render_template('login_error.html')
 
@@ -28,6 +28,10 @@ def login():
 @app.route("/")
 def index():
     return render_template('index.html')
+
+@app.route("/news")
+def news():
+    return render_template('news.html')
 
 
 @app.route("/about")

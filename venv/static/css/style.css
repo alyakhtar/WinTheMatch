@@ -97,6 +97,11 @@ footer{
   filter: blur(0);
 }
 
+.abc{
+    margin-bottom: -30px;
+}
+
+
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
