@@ -51,7 +51,6 @@ def news():
     cursor = mysql.connect().cursor()
     cursor.execute("SELECT * from news LIMIT 5")
     info = cursor.fetchall()
-    print info
     return render_template('news.html', info=info)
 
 
@@ -73,13 +72,10 @@ def batting():
         return render_template('batting.html', player=player, ground=ground, opponent=opponent)
 
     else:
-        # from Extract_data_Batting import win_count
+        import Extract_data_Batting
         batsmen = request.form.get('batsmen')
-        print batsmen
-        # return batsmen
-        # r = win_count(batsmen)
-        # print batsmen
-        return render_template('result_batting.html', batsmen=batsmen)
+        r = Extract_data_Batting.win_count(batsmen)
+        return render_template('result_batting.html', batsmen=batsmen, r=r)
 
 
 @app.route("/bowling", methods=['POST', 'GET'])

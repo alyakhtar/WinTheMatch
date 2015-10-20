@@ -24,7 +24,7 @@ def database():
 
 
 # Player scores more than 30 runs in a match
-def win_count():
+def win_count(params):
     runs = 0
     win = 0.0
     nr = 0.0
@@ -34,7 +34,8 @@ def win_count():
     strng2 = 'No result'
 
     for name in newlist:
-        if name[15] == 'V Kohli':
+        # if name[15] == 'V Kohli':
+        if name[15] == 'params':
             char = '*'
             runs = name[1]
             if runs.find(char) > -1:
