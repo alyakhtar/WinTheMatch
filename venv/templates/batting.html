@@ -59,9 +59,9 @@
 
 <h3>Select Ground :</h3>
 
-<input type="radio" name="place" onchange="changestatebtn()" value="home"><label>Home</label>
-<input type="radio" name="place" onchange="changestatebtn()" value="away"><label>Away</label>
-<button id="place-btn" onclick="uncheck()" style="width: 60px;margin-bottom:30px">Clear</button>
+<input type="radio" name="place" onchange="changestatebtn(this.name, "place-btn")" value="home"><label>Home</label>
+<input type="radio" name="place" onchange="changestatebtn(this.name, "place-btn")" value="away"><label>Away</label>
+<button id="place-btn" onclick="uncheck("place", this.id)" style="width: 60px;margin-bottom:30px" disabled=disabled>Clear</button>
 
 <h3>Select Opponent :</h3>
     <select name="opponent">
@@ -117,26 +117,28 @@
 <script src="static/js/bootstrap.min.js"></script>
 <script>
 
-document.getElementById("place-btn").disabled = true;
-
-function changestatebtn()
+function changestatebtn(element, param)
 {
-  var ele = document.getElementsByName("place");
+  ele = element;
+  // alert(ele);
+  // alert(val);
+  // var ele = document.getElementsByName("place");
 for(var i=0;i<ele.length;i++)
 {
     if (ele[i].checked)
     {
-      document.getElementById("place-btn").disabled = false;
+      document.getElementById(param).disabled = false;
     }
 }
 }
 
-function uncheck()
+function uncheck(param, element)
 {
-   var ele = document.getElementsByName("place");
+    val = element;
+   var ele = document.getElementsByName(param);
    for(var i=0;i<ele.length;i++)
       ele[i].checked = false;
-    document.getElementById("place-btn").disabled = true;
+    val.disabled = true;
 }
 
 </script>
