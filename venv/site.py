@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, flash
+from flask import Flask, request, render_template, session, flash, redirect
 from flaskext.mysql import MySQL
 
 
@@ -90,7 +90,11 @@ def batting():
                 r = Extract_data_Batting.win_against(batsmen, run, opponent)
             elif batsmen != "Select" and run:
                 r = Extract_data_Batting.win_count(batsmen, run)
-            return render_template('result_batting.html', batsmen=batsmen, r=r)
+
+            if r == "Insufficient Data":
+                return render_template('less_batting_data.html', r=r)
+            else:
+                return render_template('result_batting.html', batsmen=batsmen, r=r)
         # FORM 2
         else:
             player = request.form.get('players')

@@ -199,6 +199,9 @@ def win_combined(param1, param2, param3, param4):
                                 nr_home += 1
                             else:
                                 lost_home += 1
+                            if (win_away+lost_away) == 0:
+                                return "Insufficient Data"
+                                break
                             percentage_home = (win_home*100/(win_home+lost_home))
                         else:
                             res = ground[14]
@@ -208,6 +211,9 @@ def win_combined(param1, param2, param3, param4):
                                 nr_away += 1
                             else:
                                 lost_away += 1
+                            if (win_away+lost_away) == 0:
+                                return "Insufficient Data"
+                                break
                             percentage_away = (win_away*100/(win_away+lost_away))
 
     print 'Matches Won at home : ' + str(int(win_home))
