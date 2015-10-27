@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
-<body>
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
+<body style="background-color:#74AFAD">
+<nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom:50px">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -28,7 +28,7 @@
       <ul class="nav navbar-nav">
         <li><a href="/about">About</a></li>
         <li><a href="/news">News</a></li>
-        <li class="dropdown">
+        <li class="dropdown active">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prediction<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="/batting">Batting</a></li>
@@ -61,7 +61,7 @@
 
 <input type="radio" name="place" onchange="changestatebtn(this.name, "place-btn")" value="home"><label>Home</label>
 <input type="radio" name="place" onchange="changestatebtn(this.name, "place-btn")" value="away"><label>Away</label>
-<button id="place-btn" onclick="uncheck("place", this.id)" style="width: 60px;margin-bottom:30px" disabled=disabled>Clear</button>
+<button id="place-btn" class="btn btn-danger" onclick="uncheck("place", this.id)" style="width: 60px;float:right">Clear</button>
 
 <h3>Select Opponent :</h3>
     <select name="opponent">
@@ -80,12 +80,12 @@
 <div>
 <input type="radio" name="runs" value="30"><label>More than 30 Runs</label>
 <input type="radio" name="runs" value="50"><label>More than 50 Runs</label>
-<button style="width: 60px;margin-bottom:30px">Clear</button>
+<button class="btn btn-danger" style="width: 60px;float:right">Clear</button>
 </div>
 <br>
 
 <center>
-  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px;margin-top:30px;">Calculate win percentage</button>
 </center>
 </form>
 </div>
@@ -102,9 +102,9 @@
 <br>
 <input type="radio" name="players" value="option3">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label><br>
-<button style="width: 60px;margin-bottom:30px">Clear</button>
+<button class="btn btn-danger" style="width: 60px;margin-top:9px;">Clear</button>
 <center>
-  <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:55px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:43px;margin-bottom:30px">Calculate win percentage</button>
 </center>
 </form>
 </div>
