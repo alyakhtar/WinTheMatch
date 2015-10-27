@@ -9,6 +9,7 @@
         <link href="static/css/news.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script type="text/javascript" src="static/js/jquery.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
             $(function () {
                 $('#container').highcharts({
@@ -70,7 +71,7 @@
             });
 		</script>
 	</head>
-	<body>
+	<body style="background-color:#118C4E">
 
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
   <div class="container-fluid">
@@ -100,21 +101,24 @@
     </div>
   </div>
 </nav>
-{% if r.0 %}
-<h3>Player : {{ bowler }}</h3>
-<h3>Matches Won : {{ r.0 }}</h3>
-<h3>Matches Lost : {{ r.1 }}</h3>
-<h3>No result : {{ r.2 }}</h3>
-<h2>Win Percentage : {{ r.3 }}</h4>
-{% else %}
-<h2>Win Percentage : {{ r }}</h4>
-{% endif%}
-
 
 <script src="static/js/highcharts.js"></script>
 <script src="static/js/highcharts-3d.js"></script>
 
 <div id="container" style="height: 400px"></div>
+
+<div class="" style="margin-bottom:30px;color:black">
+    {% if r.0 %}
+    <h3 style="position:absolute;">Player : {{ bowler }}</h3>
+    <h3 style="position:absolute;margin-left:330px">Matches Won : {{ r.0 }}</h3>
+    <h3 style="position:absolute;margin-left:550px">Matches Lost : {{ r.1 }}</h3>
+    <h3 style="position:absolute;margin-left:770px">No result : {{ r.2 }}</h3>
+    <h3 style="position:absolute;margin-left:980px">Win Percentage : {{ '%0.2f' % r.3 }}%</h3>
+    {% else %}
+    <h3 style="position:absolute;margin-left:920px">Win Percentage : {{ '%0.2f' % r }}%</h3>
+    {% endif%}
+</div>
+
 
 <footer style="color:black">
   &copy Jamians
