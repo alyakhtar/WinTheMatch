@@ -83,14 +83,17 @@ def batting():
             opponent = request.form.get('opponent')
             run = request.form.get('runs')
             if batsmen != "Select" and run and venue and opponent != "Select":
-                r = Extract_data_Batting.win_combined(batsmen, opponent, run, venue)
+                r = Extract_data_Batting.win_combined(
+                    batsmen, opponent, run, venue)
             elif batsmen != "Select" and run and venue:
                 r = Extract_data_Batting.win_location(batsmen, run, venue)
             elif batsmen != "Select" and run and opponent != "Select":
                 r = Extract_data_Batting.win_against(batsmen, run, opponent)
             elif batsmen != "Select" and run:
                 r = Extract_data_Batting.win_count(batsmen, run)
-
+            elif (batsmen == "Select" and opponent == "Select") or (batsmen != "Select" and opponent == "Select") or (batsmen == "Select" and opponent != "Select"):
+                message = "Please Select a Valid Query"
+                return render_template('batting.html', message=message)
             if r == "Insufficient Data":
                 return render_template('less_batting_data.html', r=r)
             else:

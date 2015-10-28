@@ -46,8 +46,12 @@ def win_count(param1, param2):
                         nr += 1
                     else:
                         lost += 1
+                    if (win+lost) == 0:
+                        return "Insufficient Data"
+                    else:
+                        percentage = (win*100/(win+lost))
 
-    percentage = (win*100/(win+lost))
+    # percentage = (win*100/(win+lost))
 
     print 'Matches Won : ' + str(int(win))
     print 'Matches Lost : ' + str(int(lost))
@@ -95,6 +99,10 @@ def win_location(param1, param2, param3):
                             nr_home += 1
                         else:
                             lost_home += 1
+                        if (win_home+lost_home) == 0:
+                            return "Insufficient Data"
+                        else:
+                            percentage_home = (win_home*100/(win_home+lost_home))
                     else:  #away
                         res = ground[14]
                         if res.find(strng) > -1:
@@ -103,10 +111,11 @@ def win_location(param1, param2, param3):
                             nr_away += 1
                         else:
                             lost_away += 1
+                        if (win_away+lost_away) == 0:
+                            return "Insufficient Data"
+                        else:
+                            percentage_away = (win_away*100/(win_away+lost_away))
 
-
-    percentage_home = (win_home*100/(win_home+lost_home))
-    percentage_away = (win_away*100/(win_away+lost_away))
     print 'Matches Won at home : ' + str(int(win_home))
     print 'Matches Won away : ' + str(int(win_away))
     print 'Matches Lost at home : ' + str(int(lost_home))
@@ -199,10 +208,10 @@ def win_combined(param1, param2, param3, param4):
                                 nr_home += 1
                             else:
                                 lost_home += 1
-                            if (win_away+lost_away) == 0:
+                            if (win_home+lost_home) == 0:
                                 return "Insufficient Data"
-                                break
-                            percentage_home = (win_home*100/(win_home+lost_home))
+                            else:
+                                percentage_home = (win_home*100/(win_home+lost_home))
                         else:
                             res = ground[14]
                             if res.find(strng) > -1:
@@ -213,8 +222,8 @@ def win_combined(param1, param2, param3, param4):
                                 lost_away += 1
                             if (win_away+lost_away) == 0:
                                 return "Insufficient Data"
-                                break
-                            percentage_away = (win_away*100/(win_away+lost_away))
+                            else:
+                                percentage_away = (win_away*100/(win_away+lost_away))
 
     print 'Matches Won at home : ' + str(int(win_home))
     print 'Matches Won away : ' + str(int(win_away))
