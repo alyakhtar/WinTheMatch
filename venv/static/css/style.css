@@ -16,6 +16,18 @@ div {
     color: red;
 }
 
+#place-btn {
+
+    width: 60px;
+    margin-left: 40px;
+}
+
+#run-btn {
+
+    width: 60px;
+    margin-left: 40px;
+}
+
 .navbar{
     margin-top: -20px;
 }

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
-<body style="background-color:#74AFAD">
+<body class="main">
 <nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom:90px;">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -115,7 +115,7 @@
 <input type="radio" name="concede" onchange="changestatebtn2()" value="60">
 <label> Less than 60 Economy</label>
 <br><br>
-<button id="run-btn" class="btn btn-danger" onclick="uncheck2()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
+<button id="runs-btn" class="btn btn-danger" onclick="uncheck2()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
 
 <br><br>
 <center>
@@ -230,7 +230,7 @@ for(var i=0;i<ele.length;i++)
 {
     if (ele[i].checked)
     {
-      document.getElementById("run-btn").disabled = false;
+      document.getElementById("runs-btn").disabled = false;
     }
 }
 }
@@ -240,7 +240,7 @@ function uncheck2()
    var ele = document.getElementsByName("concede");
    for(var i=0;i<ele.length;i++)
       ele[i].checked = false;
-    document.getElementById("run-btn").disabled = true;
+    document.getElementById("runs-btn").disabled = true;
 }
 
 function changestatebtn3()

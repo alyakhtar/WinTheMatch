@@ -13,7 +13,7 @@
   <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
-<body style="background-color:#74AFAD">
+<body class="main">
 <nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom:50px">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -71,7 +71,7 @@
 
 <input type="radio" name="place" onchange="changestatebtn()" value="home"><label>Home</label>
 <input type="radio" name="place" onchange="changestatebtn()" value="away"><label>Away</label>
-<button id="place-btn" class="btn btn-danger" onclick="uncheck()" disabled=disabled style="width: 60px;float:right">Clear</button>
+<button id="place-btn" class="btn btn-danger" onclick="uncheck()" disabled=disabled >Clear</button>
 
 <h3>Select Opponent :</h3>
     <select name="opponent">
@@ -90,7 +90,7 @@
 
 <input type="radio" name="runs" onchange="changestate()" value="30"><label>More than 30 Runs</label>
 <input type="radio" name="runs" onchange="changestate()" value="50"><label>More than 50 Runs</label>
-<button id="run-btn" class="btn btn-danger" onclick="unchecked()" disabled=disabled style="width: 60px;float:right">Clear</button>
+<button id="run-btn" class="btn btn-danger" onclick="unchecked()" disabled=disabled>Clear</button>
 <br>
 
 <center>
@@ -112,7 +112,8 @@
 <br>
 <input type="radio" name="players" onchange="modifystate()" value="option3">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label><br>
-<button id ="form2-btn" class="btn btn-danger" onclick="disable()" disabled=disabled style="width: 60px;margin-top:9px;float:right">Clear</button>
+<br>
+<button id ="form2-btn" class="btn btn-danger" onclick="disable()" disabled=disabled>Clear</button>
 <center>
   <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:86px;margin-bottom:30px">Calculate win percentage</button>
 </center>
