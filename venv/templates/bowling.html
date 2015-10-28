@@ -59,14 +59,14 @@
 
 <h3>Select Economy :</h3>
 
-<input type="radio" name="economy" value="4">
+<input type="radio" name="economy" onchange="changestatebtn()" value="4">
 <label> Less than 4.0 Economy</label><br>
-<input type="radio" name="economy" value="5">
+<input type="radio" name="economy" onchange="changestatebtn()" value="5">
 <label> Less than 5.0 Economy</label><br>
-<input type="radio" name="economy" value="6">
+<input type="radio" name="economy" onchange="changestatebtn()" value="6">
 <label> Less than 6.0 Economy</label>
-<br>
-<button style="width: 60px;margin-bottom:30px">Clear</button>
+<br><br>
+<button id="eco-btn" class="btn btn-danger" onclick="uncheck()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
 
 
 <br><br>
@@ -96,14 +96,14 @@
 
 <h3>Number of runs conceded :</h3>
 
-<input type="radio" name="concede" value="40">
+<input type="radio" name="concede" onchange="changestatebtn2()" value="40">
 <label> Less than 40 </label><br>
-<input type="radio" name="concede" value="50">
+<input type="radio" name="concede" onchange="changestatebtn2()" value="50">
 <label> Less than 50 Economy</label><br>
-<input type="radio" name="concede" value="60">
+<input type="radio" name="concede" onchange="changestatebtn2()" value="60">
 <label> Less than 60 Economy</label>
-<br>
-<button style="width: 60px;margin-bottom:30px">Clear</button>
+<br><br>
+<button id="run-btn" class="btn btn-danger" onclick="uncheck2()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
 
 <br><br>
 <center>
@@ -131,14 +131,14 @@
 
 <h3 style="margin-bottom:30px">Select Number of Wickets :</h3>
 
-<input type="radio" name="wickets" value="3">
+<input type="radio" name="wickets" onchange="changestatebtn3()" value="3">
 <label>3 Wickets</label>
-<input type="radio" name="wickets" value="4">
+<input type="radio" name="wickets" onchange="changestatebtn3()" value="4">
 <label>4 Wickets</label>
-<input type="radio" name="wickets" value="5">
+<input type="radio" name="wickets" onchange="changestatebtn3()" value="5">
 <label>5 Wickets</label>
 <br>
-<button style="width: 60px;margin-bottom:30px;margin-top:34px">Clear</button>
+<button id="wicket-btn" class="btn btn-danger" onclick="uncheck3()" disabled=disabled style="width: 60px;margin-bottom:30px;margin-top:34px">Clear</button>
 
 <br><br>
 <center>
@@ -153,14 +153,14 @@
 
 <h3 style="margin-bottom:50px">Two bowlers take :</h3>
 
-<input type="radio" name="wickets" value="3">
+<input type="radio" name="bowl" onchange="changestatebtn4()" value="3">
 <label>3 Wickets</label><br>
-<input type="radio" name="wickets" value="4">
+<input type="radio" name="bowl" onchange="changestatebtn4()" value="4">
 <label>4 Wickets</label><br>
-<input type="radio" name="wickets" value="5">
+<input type="radio" name="bowl" onchange="changestatebtn4()" value="5">
 <label>5 Wickets</label>
 <br>
-<button style="width: 60px;margin-bottom:30px;margin-top:36px;">Clear</button>
+<button  id="bowl-btn" class="btn btn-danger"  onclick="uncheck4()" disabled=disabled style="width: 60px;margin-bottom:30px;margin-top:36px;">Clear</button>
 
 <br><br>
 <center>
@@ -177,6 +177,85 @@
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script>
-$('input[name=Choose]').attr('checked',false);
+
+function changestatebtn()
+{
+  var ele = document.getElementsByName("economy");
+for(var i=0;i<ele.length;i++)
+{
+    if (ele[i].checked)
+    {
+      document.getElementById("eco-btn").disabled = false;
+    }
+}
+}
+
+function uncheck()
+{
+   var ele = document.getElementsByName("economy");
+   for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+    document.getElementById("eco-btn").disabled = true;
+}
+
+function changestatebtn2()
+{
+  var ele = document.getElementsByName("concede");
+for(var i=0;i<ele.length;i++)
+{
+    if (ele[i].checked)
+    {
+      document.getElementById("run-btn").disabled = false;
+    }
+}
+}
+
+function uncheck2()
+{
+   var ele = document.getElementsByName("concede");
+   for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+    document.getElementById("run-btn").disabled = true;
+}
+
+function changestatebtn3()
+{
+  var ele = document.getElementsByName("wickets");
+for(var i=0;i<ele.length;i++)
+{
+    if (ele[i].checked)
+    {
+      document.getElementById("wicket-btn").disabled = false;
+    }
+}
+}
+
+function uncheck3()
+{
+   var ele = document.getElementsByName("wickets");
+   for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+    document.getElementById("wicket-btn").disabled = true;
+}
+
+function changestatebtn4()
+{
+  var ele = document.getElementsByName("bowl");
+for(var i=0;i<ele.length;i++)
+{
+    if (ele[i].checked)
+    {
+      document.getElementById("bowl-btn").disabled = false;
+    }
+}
+}
+
+function uncheck4()
+{
+   var ele = document.getElementsByName("bowl");
+   for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+    document.getElementById("bowl-btn").disabled = true;
+}
 </script>
 </html>

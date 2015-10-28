@@ -63,15 +63,16 @@ def about():
 # 6 cases
 @app.route("/batting", methods=['POST', 'GET'])
 def batting():
+    cursor = mysql.connect().cursor()
+    cursor.execute("SELECT DISTINCT(Player) from batting_statistics")
+    player = cursor.fetchall()
+    cursor.execute("SELECT DISTINCT(Ground) from batting_statistics")
+    ground = cursor.fetchall()
+    cursor.execute("SELECT DISTINCT(Opposition) from batting_statistics")
+    versus = cursor.fetchall()
+
     if request.method == 'GET':
-        cursor = mysql.connect().cursor()
-        cursor.execute("SELECT DISTINCT(Player) from batting_statistics")
-        player = cursor.fetchall()
-        cursor.execute("SELECT DISTINCT(Ground) from batting_statistics")
-        ground = cursor.fetchall()
-        cursor.execute("SELECT DISTINCT(Opposition) from batting_statistics")
-        opponent = cursor.fetchall()
-        return render_template('batting.html', player=player, ground=ground, opponent=opponent)
+        return render_template('batting.html', player=player, ground=ground, versus=versus)
 
     else:
         import Extract_data_Batting
@@ -93,7 +94,7 @@ def batting():
                 r = Extract_data_Batting.win_count(batsmen, run)
             elif (batsmen == "Select" and opponent == "Select") or (batsmen != "Select" and opponent == "Select") or (batsmen == "Select" and opponent != "Select"):
                 message = "Please Select a Valid Query"
-                return render_template('batting.html', message=message)
+                return render_template('batting.html', player=player, ground=ground, versus=versus, message=message)
             if r == "Insufficient Data":
                 return render_template('less_batting_data.html', r=r)
             else:
@@ -146,7 +147,7 @@ def bowling():
                 r = Extract_Data_Bowling.win_seamer(wicket)
             return render_template('result_bowling.html', style=style, r=r)
         else:
-            wicket = request.form.get('wickets')
+            wicket = request.form.get('bowl')
             r = Extract_Data_Bowling.win_spinners(wicket)
             return render_template('result_bowling.html', r=r)
 

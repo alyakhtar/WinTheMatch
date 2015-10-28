@@ -12,6 +12,10 @@ div {
     border-radius:25px;
 }
 
+#error {
+    color: red;
+}
+
 .navbar{
     margin-top: -20px;
 }

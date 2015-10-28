@@ -47,7 +47,12 @@
 
 <form method="POST" class="main-form-bat">
 
-{{ message }}
+<div id="error">
+<br>
+{% if message %}
+  Error : {{ message }}
+{% endif %}
+</div>
 
 <h3>Select Batsmen :</h3>
   <select name="batsmen">
@@ -71,7 +76,7 @@
 <h3>Select Opponent :</h3>
     <select name="opponent">
     <option>Select</option>
-      {% for opp in opponent %}
+      {% for opp in versus %}
         {% for o in opp %}
         <option>
           {{ o }}
