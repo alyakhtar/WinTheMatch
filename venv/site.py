@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, flash, redirect
+from flask import Flask, request, render_template, session, flash
 from flaskext.mysql import MySQL
 
 
@@ -113,14 +113,14 @@ def batting():
 
 @app.route("/bowling", methods=['POST', 'GET'])
 def bowling():
+    var = '-'
+    cursor = mysql.connect().cursor()
+    cursor.execute("SELECT DISTINCT(Player) from bowling_statistics")
+    player = cursor.fetchall()
+    cursor.execute(
+        "SELECT DISTINCT(Type) from bowling_statistics where Type!=%s", (var))
+    style = cursor.fetchall()
     if request.method == 'GET':
-        var = '-'
-        cursor = mysql.connect().cursor()
-        cursor.execute("SELECT DISTINCT(Player) from bowling_statistics")
-        player = cursor.fetchall()
-        cursor.execute(
-            "SELECT DISTINCT(Type) from bowling_statistics where Type!=%s", (var))
-        style = cursor.fetchall()
         return render_template('bowling.html', player=player, style=style)
 
     else:
@@ -132,12 +132,18 @@ def bowling():
             if bowler != "Select" and eco:
                 r = Extract_Data_Bowling.win_economy(bowler, eco)
                 return render_template('result_bowling.html', bowler=bowler, r=r)
+            elif (bowler == "Select" and eco) or (bowler != "Select" and not eco) or(bowler == "Select" and not eco):
+                message1 = "Please select a valid query"
+                return render_template('bowling.html', player=player, message1=message1)
         elif request.form.get('btn') == 'form2':
             bowler = request.form.get('bowler')
             run = request.form.get('concede')
             if bowler != "Select" and run:
                 r = Extract_Data_Bowling.win_runs(bowler, run)
                 return render_template('result_bowling.html', bowler=bowler, r=r)
+            elif (bowler == "Select" and run) or (bowler != "Select" and not run) or(bowler == "Select" and not run):
+                message2 = "Please select a valid query"
+                return render_template('bowling.html', player=player, message2=message2)
         elif request.form.get('btn') == 'form3':
             style = request.form.get('style')
             wicket = request.form.get('wickets')
@@ -145,11 +151,18 @@ def bowling():
                 r = Extract_Data_Bowling.win_spinners(wicket)
             elif style != "Select" and style == "Seamer" and wicket:
                 r = Extract_Data_Bowling.win_seamer(wicket)
+            elif (style == "Select" and wicket) or (style != "Select" and not wicket) or (style == "Select" and not wicket):
+                message3 = "Please select a valid query"
+                return render_template('bowling.html', player=player, message3=message3)
             return render_template('result_bowling.html', style=style, r=r)
         else:
             wicket = request.form.get('bowl')
-            r = Extract_Data_Bowling.win_spinners(wicket)
-            return render_template('result_bowling.html', r=r)
+            if not wicket:
+                message4 = "Please Select a valid query"
+                return render_template('bowling.html', message4=message4)
+            else:
+                r = Extract_Data_Bowling.win_spinners(wicket)
+                return render_template('result_bowling.html', r=r)
 
 
 if __name__ == "__main__":

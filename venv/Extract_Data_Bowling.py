@@ -46,7 +46,10 @@ def win_economy(param1, param2):
                     else:
                         lost += 1
 
-    percentage = (win*100/(win+lost))
+    if (win+lost) == 0:
+        return "Insufficient Data"
+    else:
+        percentage = (win*100/(win+lost))
 
     print 'Matches Won : ' + str(int(win))
     print 'Matches Lost : ' + str(int(lost))
@@ -78,6 +81,11 @@ def win_runs(param1, param2):
                         nr += 1
                     else:
                         lost += 1
+
+    if (win+lost) == 0:
+        return "Insufficient Data"
+    else:
+        percentage = (win*100/(win+lost))
 
     percentage = (win*100/(win+lost))
 
@@ -193,7 +201,10 @@ def win_seamer(param):
                 else:
                     lost += 1
 
-    percentage = ((win*100)/(win+lost))
+    if (win+lost) == 0:
+        return "Insufficient Data"
+    else:
+        percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
     return percentage
@@ -224,7 +235,10 @@ def two_bowlers(param):
                 else:
                     lost += 1
 
-    percentage = ((win*100)/(win+lost))
+    if (win+lost) == 0:
+        return "Insufficient Data"
+    else:
+        percentage = ((win*100)/(win+lost))
 
     print 'Win Percentage : %.2f%% ' % (percentage)
     return percentage

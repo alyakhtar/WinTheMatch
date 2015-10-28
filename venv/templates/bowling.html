@@ -45,6 +45,12 @@
 <div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px;margin-bottom:50px;">
 <form method="POST" class="main-form-bowl">
 
+<div id="error">
+{% if message1 %}
+  Error: {{ message1 }}
+{% endif %}
+</div>
+
 <h3>Select Bowler :</h3>
     <select name="bowler">
     <option>Select</option>
@@ -78,6 +84,12 @@
 
 <div class="col-sm-3" style="background-color:lavender">
 <form method="POST" class="main-form-bowl">
+
+<div id="error">
+{% if message2 %}
+  Error: {{ message2 }}
+{% endif %}
+</div>
 
 <h3>Select Bowler :</h3>
     <select name="bowler">
@@ -117,6 +129,13 @@
 <div class="row">
 <div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px">
 <form method="POST" class="main-form-bowl">
+
+<div id="error">
+{% if message3 %}
+  Error: {{ message3 }}
+{% endif %}
+</div>
+
 <h3>Select Set of Bowlers :</h3>
     <select name="style">
         <option>Select</option>
@@ -150,6 +169,12 @@
 
 <div class="col-sm-3" style="background-color:lavender">
 <form method="POST" class="main-form-bowl">
+
+<div id="error">
+{% if message4 %}
+  Error: {{ message4 }}
+{% endif %}
+</div>
 
 <h3 style="margin-bottom:50px">Two bowlers take :</h3>
 
