@@ -8,6 +8,10 @@ body{
     padding:40px;
 }
 
+div {
+    border-radius:25px;
+}
+
 .navbar{
     margin-top: -20px;
 }
