@@ -93,8 +93,8 @@ def batting():
             elif batsmen != "Select" and run:
                 r = Extract_data_Batting.win_count(batsmen, run)
             elif (batsmen == "Select" and opponent == "Select") or (batsmen != "Select" and opponent == "Select") or (batsmen == "Select" and opponent != "Select"):
-                message = "Please Select a Valid Query"
-                return render_template('batting.html', player=player, ground=ground, versus=versus, message=message)
+                message1 = "Please Select a Valid Query"
+                return render_template('batting.html', player=player, ground=ground, versus=versus, message1=message1)
             if r == "Insufficient Data":
                 return render_template('less_batting_data.html', r=r)
             else:
@@ -106,8 +106,11 @@ def batting():
                 r = Extract_data_Batting.double_half_century()
             elif player == "option2":
                 r = Extract_data_Batting.century()
-            else:
+            elif player == "option3":
                 r = Extract_data_Batting.combined_score()
+            else:
+                message2 = "Please Select a Valid Query"
+                return render_template('batting.html', message2=message2)
             return render_template('result_batting.html', r=r)
 
 
