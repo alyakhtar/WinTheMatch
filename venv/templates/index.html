@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
-<body class = "main">
+<body class = "">
+<div class="main"></div>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -39,6 +40,7 @@
       </ul>
       {% if not session.logged_in %}
         <ul class="nav navbar-nav navbar-right">
+        <li><a href="#feedback" data-toggle="modal">Feedback</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Admin</b> <span class="caret"></span></a>
         <ul id="login-dp" class="dropdown-menu">
@@ -65,7 +67,7 @@
           </li>
         </ul>
         {% else %}
-              <ul class="nav navbar-nav navbar-right">a
+              <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="/logout"><b>Logout</b></a>
           </li>
@@ -78,12 +80,11 @@
 
 <div class="container-fluid">
   <center>
-    <h1>CHOOSE AN OPTION</h1>
-    <p>Clicking on the option will give statistics for that option</p><br>
+    <h1 style="background-color:black;margin-bottom:50px;width:400px">CHOOSE AN OPTION</h1>
   </center>
   <div class="row">
     <div class="col-sm-6">
-      <a href="/batting"><img  class ="bat" src="static/img/batting.jpg" alt=""></a>
+      <a href="/batting"><img  class ="bat" style="padding-left:-50px" src="static/img/batting.jpg" alt=""></a>
     </div>
     <div class="col-sm-6" >
       <a href="/bowling"><img  class ="bowl" src="static/img/bowling.jpg" alt=""></a>
@@ -94,6 +95,41 @@
 <footer>
   &copy Jamians
 </footer>
+<div class="modal fade" id="feedback" role="dialog" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form class="form-horizontal"  method="post" action="" >
+          <div class="modal-header">
+            <h4>Feedback</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="contact-name" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="First & Last Name" name="name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-email" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" placeholder="example@domain.com" name="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-message" class="col-sm-2 control-label" >Message</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="4" name="comment"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit"  class="btn btn-primary" value="SEND" name="send">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
