@@ -41,8 +41,171 @@
   </div>
 </nav>
 
-<div class="row">
-<div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px;margin-bottom:50px;">
+
+<div style="background-color:white">
+  <div class="container" style="padding-left:350px;margin-top:-50px;font-color:white:">
+  <h2 style="margin-left:180px">OPTIONS</h2>
+    <ul class="nav nav-tabs" role="menu" aria-labelledby="menu">
+      <li role="presentation"><a href="#" onClick="$('#1').show();$('#2').hide();$('#3').hide();$('#4').hide();"> ECONOMY</a></li>
+      <li role="presentation"><a href="#" onClick="$('#1').hide();$('#2').show();$('#3').hide();$('#4').hide();"> RUNS CONCEDED </a></li>
+      <li role="presentation"><a href="#" onClick="$('#1').hide();$('#2').hide();$('#3').show();$('#4').hide();"> WICKETS </a></li>
+      <li role="presentation"><a href="#" onClick="$('#1').hide();$('#2').hide();$('#3').hide();$('#4').show();"> TWO BOWLERS </a></li>
+    </ul>
+  </div>
+  <div class="col-sm-3" id="1" style="background-color:lavenderblush;margin-left:490px;margin-top:20px;display:none">
+    <form method="POST" class="main-form-bowl">
+      <div id="error">
+      {% if message1 %}
+        <h3>Error: {{ message1 }}</h3>
+      {% endif %}
+      </div>
+
+      <h3>Select Bowler :</h3>
+          <select name="bowler">
+          <option>Select</option>
+            {% for play in player %}
+              {% for p in play %}
+              <option>
+                {{ p }}
+              </option>
+              {% endfor %}
+            {% endfor %}
+          </select>
+
+      <h3>Select Economy :</h3>
+
+      <input type="radio" name="economy" onchange="changestatebtn()" value="4">
+      <label> Less than 4.0 Economy</label><br>
+      <input type="radio" name="economy" onchange="changestatebtn()" value="5">
+      <label> Less than 5.0 Economy</label><br>
+      <input type="radio" name="economy" onchange="changestatebtn()" value="6">
+      <label> Less than 6.0 Economy</label>
+      <br><br>
+      <button id="eco-btn" class="btn btn-danger" onclick="uncheck()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
+
+      <br><br>
+      <center>
+        <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+      </center>
+      </form>
+      </div>
+  </div>
+
+  <div class="col-sm-3" id="2" style="background-color:lavenderblush;display:none;margin-left:490px;margin-top:20px;">
+    <form method="POST" class="main-form-bowl">
+
+      <div id="error">
+      {% if message2 %}
+        <h3>Error: {{ message2 }}</h3>
+      {% endif %}
+      </div>
+
+      <h3>Select Bowler :</h3>
+          <select name="bowler">
+          <option>Select</option>
+            {% for play in player %}
+              {% for p in play %}
+              <option>
+                {{ p }}
+              </option>
+              {% endfor %}
+            {% endfor %}
+          </select>
+
+
+      <br>
+
+      <h3>Number of runs conceded :</h3>
+
+      <input type="radio" name="concede" onchange="changestatebtn2()" value="40">
+      <label> Less than 40 </label><br>
+      <input type="radio" name="concede" onchange="changestatebtn2()" value="50">
+      <label> Less than 50 Economy</label><br>
+      <input type="radio" name="concede" onchange="changestatebtn2()" value="60">
+      <label> Less than 60 Economy</label>
+      <br><br>
+      <button id="runs-btn" class="btn btn-danger" onclick="uncheck2()" disabled=disabled style="width: 60px;margin-bottom:30px">Clear</button>
+
+      <br><br>
+      <center>
+        <button type="submit" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+      </center>
+
+      </form>
+   </div>
+
+   <div class="col-sm-3" id="3" style="background-color:lavenderblush;margin-left:490px;margin-top:20px;display:none">
+    <form method="POST" class="main-form-bowl">
+
+    <div id="error">
+    {% if message3 %}
+      <h3>Error: {{ message3 }}</h3>
+    {% endif %}
+    </div>
+
+    <h3>Select Set of Bowlers :</h3>
+        <select name="style">
+            <option>Select</option>
+          {% for type in style %}
+            {% for t in type %}
+            <option>
+              {{ t }}
+            </option>
+            {% endfor %}
+          {% endfor %}
+        </select>
+
+    <h3 style="margin-bottom:30px">Select Number of Wickets :</h3>
+
+    <input type="radio" name="wickets" onchange="changestatebtn3()" value="3">
+    <label>3 Wickets</label>
+    <input type="radio" name="wickets" onchange="changestatebtn3()" value="4">
+    <label>4 Wickets</label>
+    <input type="radio" name="wickets" onchange="changestatebtn3()" value="5">
+    <label>5 Wickets</label>
+    <br>
+    <button id="wicket-btn" class="btn btn-danger" onclick="uncheck3()" disabled=disabled style="width: 60px;margin-bottom:30px;margin-top:34px">Clear</button>
+
+    <br><br>
+    <center>
+      <button type="submit" class="btn btn-primary btn-block" name="btn" value="form3" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+    </center>
+
+    </form>
+  </div>
+
+  <div class="col-sm-3" id="4" style="background-color:lavenderblush;display:none;margin-left:490px;margin-top:20px;">
+    <form method="POST" class="main-form-bowl">
+
+    <div id="error">
+    {% if message4 %}
+      <h3>Error: {{ message4 }}</h3>
+    {% endif %}
+    </div>
+
+    <h3 style="margin-bottom:50px">Two bowlers take :</h3>
+
+    <input type="radio" name="bowl" onchange="changestatebtn4()" value="3">
+    <label>3 Wickets</label><br>
+    <input type="radio" name="bowl" onchange="changestatebtn4()" value="4">
+    <label>4 Wickets</label><br>
+    <input type="radio" name="bowl" onchange="changestatebtn4()" value="5">
+    <label>5 Wickets</label>
+    <br>
+    <button  id="bowl-btn" class="btn btn-danger"  onclick="uncheck4()" disabled=disabled style="width: 60px;margin-bottom:30px;margin-top:36px;">Clear</button>
+
+    <br><br>
+    <center>
+      <button type="submit" class="btn btn-primary btn-block" name="btn" value="form4" style="width: 300px;margin-bottom:30px">Calculate win percentage</button>
+    </center>
+    </form>
+  </div>
+</div>
+  
+
+
+<!-- <div class="row">
+<div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px;margin-bottom:50px;display:none">
 <form method="POST" class="main-form-bowl">
 
 <div id="error">
@@ -82,7 +245,7 @@
 </form>
 </div>
 
-<div class="col-sm-3" style="background-color:lavenderblush">
+<div class="col-sm-3" style="background-color:lavenderblush;display:none">
 <form method="POST" class="main-form-bowl">
 
 <div id="error">
@@ -127,7 +290,7 @@
 </div>
 
 <div class="row">
-<div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px">
+<div class="col-sm-3" style="background-color:lavenderblush;margin-left:250px;margin-right:150px;display:none">
 <form method="POST" class="main-form-bowl">
 
 <div id="error">
@@ -167,7 +330,7 @@
 </form>
 </div>
 
-<div class="col-sm-3" style="background-color:lavenderblush">
+<div class="col-sm-3" style="background-color:lavenderblush;display:none">
 <form method="POST" class="main-form-bowl">
 
 <div id="error">
@@ -193,7 +356,7 @@
 </center>
 </form>
 </div>
-</div>
+</div> -->
 
 <footer class="ftr">
   &copy Jamians
