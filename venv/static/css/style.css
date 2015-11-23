@@ -3,7 +3,7 @@
     padding:40px;
 }
 
-#bat-formu{
+.main{
     padding:40px;
 }
 
@@ -155,3 +155,25 @@ footer{
 .abc{
     margin-bottom: -30px;
 }
+
+#exTab3 .nav-pills > li > a {
+    font-weight: bold;
+  border-radius: 4px 4px 0 0 ;
+}
+
+#exTab3 .tab-content {
+  background-color: #337ab7;
+  padding : 5px 15px;
+  border-radius: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
