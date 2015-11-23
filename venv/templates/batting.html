@@ -37,13 +37,13 @@
             <li><a href="/bowling">Bowling</a></li>
           </ul>
         </li>
-        <li><a href="https://github.com/alyakhtar/WinTheMatch-1"><i class="fa fa-github fa-lg"></i></a></li>
+        <li><a href="https://github.com/alyakhtar/WinTheMatch"><i class="fa fa-github fa-lg"></i></a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="col-sm-5" style="background-color:lavenderblush;margin-left:50px">
+<div class="col-sm-5" style="background-color:lavender;margin-left:50px">
 
 <form method="POST" class="main-form-bat">
 
@@ -94,7 +94,7 @@
 <br>
 
 <center>
-  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:30px;margin-top:30px;">Calculate win percentage</button>
+  <button type="submit" class="btn btn-primary btn-block" name="btn" value="form1" style="width: 300px;margin-bottom:20px;margin-top:40px;">Calculate win percentage</button>
 </center>
 </form>
 <br>
@@ -102,7 +102,7 @@
 
 <div class="col-sm-2"></div>
 
-<div class="col-sm-5" style="background-color:lavenderblush;margin-left:100px;" id="form2">
+<div class="col-sm-5" style="background-color:lavender;margin-left:100px;" id="form2">
 <form method="POST" class="main-form2">
 <div id="error">
 {% if message2 %}
@@ -118,9 +118,9 @@
 <input type="radio" name="players" onchange="modifystate()" value="option3">
 <label><h4 style="padding-top:50px;">Two players score more than 80 runs</h4></label><br>
 <br>
-<button id ="form2-btn" class="btn btn-danger" onclick="disable()" disabled=disabled>Clear</button>
+<button id ="form2-btn" class="btn btn-danger pull-right" style="margin-right:50px;" onclick="disable()" disabled=disabled>Clear</button>
 <center>
-  <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:86px;margin-bottom:30px">Calculate win percentage</button>
+  <button type="submit" method="POST" class="btn btn-primary btn-block" name="btn" value="form2" style="width: 300px;margin-top:96px;margin-bottom:30px">Calculate win percentage</button>
 </center>
 </form>
 </div>
