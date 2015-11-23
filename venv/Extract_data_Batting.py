@@ -163,7 +163,10 @@ def win_against(param1, param2, param3):
                         else:
                             lost += 1
 
-    percentage = (win*100/(win+lost))
+    if (win+lost) == 0:
+        return "Insufficient Data"
+    else:
+        percentage = (win*100/(win+lost))
 
     print 'Matches Won : ' + str(int(win))
     print 'Matches Lost : ' + str(int(lost))
