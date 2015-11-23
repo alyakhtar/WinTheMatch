@@ -1,5 +1,9 @@
-body{
+.bckg{
     background:url('/static/img/background.jpg');
+    padding:40px;
+}
+
+#bat{
     padding:40px;
 }
 
