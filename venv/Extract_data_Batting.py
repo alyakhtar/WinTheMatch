@@ -247,7 +247,7 @@ def win_combined(param1, param2, param3, param4):
     if param4 == "home":
         return str(int(win_home)), str(int(lost_home)), str(int(nr_home)), percentage_home
     else:
-        return str(int(win_away)), str(int(lost_away)), str(int(lost_away)), percentage_away
+        return str(int(win_away)), str(int(lost_away)), str(int(nr_away)), percentage_away
 
 
 # check code from here
